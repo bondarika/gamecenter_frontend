@@ -1,0 +1,10 @@
+.page {
+  min-width: 100%;
+  min-height: 100vh;
+
+  box-sizing: border-box;
+  padding: 24px;
+
+  background: #DDDDDD url("./pattern.png");
+  background-size: contain;
+}
