@@ -73,9 +73,17 @@
 
     color: #265178;
 
+    cursor: pointer;
+
     &:disabled {
       background: #BBBBBB;
       color: #888888;
+
+      cursor: default;
+    }
+
+    &:active {
+      transform: scale(0.97);
     }
   }
 

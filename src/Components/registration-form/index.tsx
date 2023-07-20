@@ -3,7 +3,7 @@ import cx from 'classnames';
 import { useStore } from 'effector-react';
 
 import { Logo } from '../logo';
-import { $authStore, postCheckAuth, setNoError } from './store';
+import { $authStore, postCheckAuth } from './store';
 
 import './index.scss';
 
@@ -15,20 +15,21 @@ export const RegistrationForm = ({ mix }: Props) => {
     const [login, setLogin] = React.useState('');
     const [password, setPassword] = React.useState('');
 
-    const [progress, setProgress] = React.useState(false);
+    const [pending, setPending] = React.useState(false);
 
     const { error } = useStore($authStore);
 
     const handleSubmit = async () => {
-        setNoError();
-
-        setProgress(true);
+        setPending(true);
 
         await postCheckAuth({ login, password });
 
-        setProgress(false);
+        setPending(false);
     }
 
+    // Если тестить с компа то есть прикол, что автозаполненные браузером поля
+    // не считываются сразу же и кнопка остается disabled
+    // С мобилы не должно быть такого, через ngrok можно потестить в теории
     return (
         <div className={cx('registration-form', mix)}>
             <Logo mix="registration-form__logo" />
@@ -41,7 +42,7 @@ export const RegistrationForm = ({ mix }: Props) => {
                 <input className="registration-form__input" placeholder="логин" value={login} onChange={e => setLogin(e.target.value)} type="text" name="login" />
                 <input className="registration-form__input" placeholder="пароль" value={password} onChange={e => setPassword(e.target.value)} type="password" />
 
-                <button className="registration-form__submit" onClick={handleSubmit} disabled={progress || !login || !password}>ГОТОВО</button>
+                <button className="registration-form__submit" onClick={handleSubmit} disabled={pending || !login || !password}>ГОТОВО</button>
             </div>
 
             {/* сократил текст из макета, иначе получается очень мелко */}

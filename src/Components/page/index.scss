@@ -1,4 +1,7 @@
 .page {
+  display: flex;
+  justify-content: center;
+
   min-width: 100%;
   min-height: 100vh;
 
@@ -7,4 +10,8 @@
 
   background: #DDDDDD url("./pattern.png");
   background-size: contain;
+
+  &__content {
+    max-width: 600px;
+  }
 }

@@ -5,6 +5,7 @@ import { AuthData, AuthStore } from './typing';
 export const $authStore = createStore<AuthStore>({});
 
 export const postCheckAuth = createEffect((payload: { login: string, password: string }) => {
+    setNoError();
     // return post('/some-auth', payload);
 
     // фиктивная штучка, чтоб можно было без бэка логиниться

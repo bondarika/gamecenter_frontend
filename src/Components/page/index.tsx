@@ -13,9 +13,11 @@ interface Props {
 export const Page = ({children, mix}: Props) => {
     return (
         <div className={cx('page', mix)}>
-            {children}
+            <div className='page__content'>
+                {children}
 
-            <SupportPlate mix="page__support-plate" />
+                <SupportPlate mix="page__support-plate" />
+            </div>
         </div>
     );
 }
