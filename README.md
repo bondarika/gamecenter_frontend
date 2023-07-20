@@ -1,5 +1,7 @@
 # Сайт с квестом Игра Центра
 
+Тз с макетом https://www.notion.so/techdep/Front-end-42fa7e6c2ee1471195a821e59c01d1c8?pvs=4
+
 Чтобы запуститься в режиме разработки
 ```bash
 npm run start
