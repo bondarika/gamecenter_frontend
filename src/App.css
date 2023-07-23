@@ -1,0 +1,24 @@
+@font-face {
+    font-family: "SFMonoMedium";
+    src: url("fonts/SFMonoMedium.woff2") format("woff2"),
+    url("fonts/SFMonoMedium.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "SFMonoBold";
+    src: url("fonts/SFMonoBold.woff2") format("woff2"),
+    url("fonts/SFMonoBold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "SF-Pro-Rounded-Medium";
+    src: url("fonts/SF-Pro-Rounded-Medium.woff2") format("woff2"),
+    url("fonts/SF-Pro-Rounded-Medium.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}

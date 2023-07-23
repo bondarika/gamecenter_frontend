@@ -6,12 +6,20 @@
   min-height: 100vh;
 
   box-sizing: border-box;
-  padding: 24px;
+  padding: 84px 24px 0 24px;
 
   background: #DDDDDD url("./pattern.png");
   background-size: contain;
 
   &__content {
     max-width: 600px;
+  }
+  @media screen and (max-width: 425px){
+    &__content {
+      max-width: 100%;
+    }
+    .registration-form__input, .registration-form__input:-webkit-autofill, .registration-form__submit {
+      font-size: unset;
+    }
   }
 }
