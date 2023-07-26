@@ -1,0 +1,39 @@
+.status-plate {
+    display: flex;
+    align-items: center;
+
+    padding: 16px 16px 16px 24px;
+    border-radius: 24px;
+
+    background: #eeeeee;
+
+    &__logo {
+        width: 36px;
+        height: 36px;
+
+        margin-right: auto;
+    }
+
+    &__block {
+        display: flex;
+        align-items: center;
+
+        height: 36px;
+        margin-left: 8px;
+        padding: 0 8px;
+        border-radius: 8px;
+
+        background-color: #dddddd;
+        color: #888888;
+
+        &_orange {
+            background: #F28B53;
+            color: #853D16;
+        }
+
+        svg {
+            margin-left: 1px;
+            margin-right: 8px;
+        }
+    }
+}

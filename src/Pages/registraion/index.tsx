@@ -15,7 +15,7 @@ export const Registration = () => {
 
     const redirect = useNavigate();
 
-    // хук срабатывает когда изменяется data
+    // хук срабатывает когда изменяется информация об авторизации
     React.useEffect(() => {
         if (data?.type === 'participant') {
             redirect('/participant');
