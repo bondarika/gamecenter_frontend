@@ -1,0 +1,39 @@
+.popup-plate {
+    display: flex;
+
+    padding: 16px;
+    border-radius: 12px;
+
+    background-color: #ddd;
+
+    &__title {
+        margin-left: 16px;
+
+        // font-weight: 600;
+        font-size: 18px;
+        line-height: 18px;
+    }
+
+    &__expand-button {
+        display: none;
+
+        margin-left: auto
+    }
+
+    &_status_finished,
+    &_status_locked {
+        .popup-plate__title {
+            color: #888888;
+        }
+    }
+
+    &_status_active {
+        &.popup-plate {
+            cursor: pointer;
+        }
+
+        .popup-plate__expand-button {
+            display: block;
+        }
+    }
+}

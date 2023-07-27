@@ -6,6 +6,8 @@
         "participant__button participant__button_disabled participant__button_type_machine"
     
     Таким образом с каждым активным модификатором добавляется по одному классу
+
+    В Components/status-plate есть примеры
 */
 export const bem = (root: string) => (block?: string, modificators?: any) => {
     // тут только есть баг, что модификаторы не смогут случится, если не передан block
