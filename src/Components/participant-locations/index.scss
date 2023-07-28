@@ -1,0 +1,44 @@
+.participant-locations {
+    padding: 12px;
+
+    border-radius: 24px;
+
+    background-color: #eeeeee;
+
+    &__content-wrapper {
+        margin-bottom: 12px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__content {
+        padding: 16px;
+
+        border-radius: 8px;
+
+        background-color: #eeeeee;
+    }
+
+    &__content-title {
+        font-size: 18px;
+        line-height: 18px;
+        font-weight: 600;
+        color: #4A98DD;
+
+        margin-bottom: 12px;
+    }
+
+    &__content-text {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    &__content-image {
+        max-width: 100%;
+        margin-top: 12px;
+
+        border-radius: 8px;
+    }
+}

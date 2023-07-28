@@ -18,31 +18,35 @@ const b = bem('popup-plate');
 export const PopupPlate = ({ title, status, numberic, defaultExpanded, children, mix }: Props) => {
     const [expanded, setExpanded] = React.useState(status === 'active' && (defaultExpanded ?? false));
 
+    const handleExpand = () => setExpanded((val) => !val);
+
     return (
-        <div className={`popup-plate popup-plate_status_${status} ${mix ? mix : ""}`}>
-            <div className={b('status-badge', { status })} data-numberic={numberic}>
-                {/* content: attr("numberic") */}
+        <div className={`popup-plate popup-plate_status_${status} ${mix ? mix : ''}`}>
+            <div className={b('controls')} onClick={handleExpand}>
+                <div className={b('status-badge', { status })} data-numberic={numberic} />
+
+                <h2 className={b('title')}>{title}</h2>
+
+                <svg
+                    className={b('expand-button', { expanded })}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                >
+                    <path d="M12 8L6 14L12 8Z" fill="#111111" />
+                    <path
+                        d="M18 14L12 8L6 14"
+                        stroke="#AAAAAA"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    />
+                </svg>
             </div>
 
-            <span className={b('title')}>{title}</span>
-
-            <svg
-                className={b('expand-button')}
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-            >
-                <path d="M12 8L6 14L12 8Z" fill="#111111" />
-                <path
-                    d="M18 14L12 8L6 14"
-                    stroke="#AAAAAA"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                />
-            </svg>
+            {expanded && <div className={b('content')}>{children}</div>}
         </div>
     );
 };

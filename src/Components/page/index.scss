@@ -14,7 +14,8 @@
   &__content {
     max-width: 600px;
   }
-  @media screen and (max-width: 425px){
+
+  @media screen and (max-width: 600px){
     &__content {
       max-width: 100%;
     }
