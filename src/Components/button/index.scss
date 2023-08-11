@@ -1,0 +1,33 @@
+.button {
+    height: 48px;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 16px;
+
+    cursor: pointer;
+
+    font-family: SFProRounded, serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 16px;
+
+    transition: 0.2s;
+
+    &_blue {
+        background: #6bbaff;
+
+        color: #265178;
+    }
+
+    &:disabled {
+        background: #bbbbbb;
+        color: #888888;
+
+        cursor: default;
+    }
+
+    &:active {
+        transform: scale(0.97);
+    }
+}

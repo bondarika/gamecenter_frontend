@@ -2,6 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import { useStore } from 'effector-react';
 
+import { Button } from '../button'
 import { Logo } from '../logo';
 import { $authStore, postCheckAuth } from './store';
 
@@ -27,9 +28,8 @@ export const RegistrationForm = ({ mix }: Props) => {
         setPending(false);
     }
 
-    // Если тестить с компа то есть прикол, что автозаполненные браузером поля
-    // не считываются сразу же и кнопка остается disabled
-    // С мобилы не должно быть такого, через ngrok можно потестить в теории
+    // Есть прикол, что автозаполненные браузером поля не триггерят onChange
+    // и кнопка submit остается disabled, пока пользователь не кликнет по полю
     return (
         <div className={cx('registration-form', mix)}>
             <Logo mix="registration-form__logo" />
@@ -42,7 +42,7 @@ export const RegistrationForm = ({ mix }: Props) => {
                 <input className="registration-form__input" placeholder="логин" value={login} onChange={e => setLogin(e.target.value)} type="text" name="login" />
                 <input className="registration-form__input" placeholder="пароль" value={password} onChange={e => setPassword(e.target.value)} type="password" />
 
-                <button className="registration-form__submit" onClick={handleSubmit} disabled={pending || !login || !password}>ГОТОВО</button>
+                <Button onClick={handleSubmit} disabled={pending || !login || !password}>ГОТОВО</Button>
             </div>
 
             {/* сократил текст из макета, иначе получается очень мелко */}

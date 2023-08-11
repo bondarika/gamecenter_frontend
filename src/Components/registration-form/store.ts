@@ -4,7 +4,7 @@ import { AuthData, AuthStore } from './typing';
 
 export const $authStore = createStore<AuthStore>({});
 
-export const postCheckAuth = createEffect((payload: { login: string, password: string }) => {
+export const postCheckAuth = createEffect((payload: { login: string; password: string }) => {
     setNoError();
     // return post('/some-auth', payload);
 
@@ -16,10 +16,9 @@ export const postCheckAuth = createEffect((payload: { login: string, password: s
     });
 });
 
-$authStore
-    .on(postCheckAuth.doneData, (store, res: AuthData) => {
-        return { data: res, error: false };
-    });
+$authStore.on(postCheckAuth.doneData, (store, res: AuthData) => {
+    return { data: res, error: false };
+});
 
 export const setNoError = createEvent();
 
