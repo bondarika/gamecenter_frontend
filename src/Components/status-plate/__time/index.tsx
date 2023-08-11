@@ -1,45 +1,26 @@
 import React from 'react';
 
+import { parseTime } from '../../../utils/parseTime';
 import { b } from '../index';
 
-const getTimeDifference = (startTime: Date) => new Date().getTime() - startTime.getTime();
-
-const parseTime = (time: number) => {
-    const secondsLeft = Math.floor(time / 1000);
-
-    const hours = Math.floor(secondsLeft / 3600);
-    const minutes = Math.floor((secondsLeft % 3600) / 60);
-    const seconds = secondsLeft % 60;
-
-    return (
-        `${hours.toString().padStart(2, '0')}` +
-        `:${minutes.toString().padStart(2, '0')}` +
-        `:${seconds.toString().padStart(2, '0')}`
-    );
-};
+const getTimeDifference = (time: Date) => time.getTime() - new Date().getTime();
 
 export const StatusPlateTime = () => {
-    // берем время, полученное с бэка и сохранное в стор
-    const startTime = new Date('2023-07-28');
+    const endTime = new Date('2023-07-28'); // берем время, полученное с бэка и сохранное в стор
 
     const [time, setTime] = React.useState('--:--:--');
 
     React.useEffect(() => {
-        // setInterval работает не четко за обозначенный интервал
-        // (например если js-поток перегружен или пользователь переключился на другую вкладку или закрыл приложение)
-        // лучше requestAnimationFrame, все равно каждую секунду обновляемся
         const interval: ReturnType<typeof setInterval> = setInterval(() => {
-            const timeDiff = getTimeDifference(startTime);
+            const timeDiff = getTimeDifference(endTime);
 
-            if (timeDiff > 0) {
-                // остановить квест, редиректнуть на конец квеста и перезапросить с бэка статус
+            if (timeDiff > 0) { // значит квест закончился
                 setTime(parseTime(0));
                 return clearInterval(interval);
             }
 
-            // берем минус, чтобы показывать нормальный таймер назад
-            setTime(parseTime(-timeDiff));
-        }, 1000); // 1000ms
+            setTime(parseTime(-timeDiff)); // берем минус, тк идет обратный отсчет
+        }, 1000);
     }, []); // здесь пустой массив, чтобы эффект случился только при первом рендере
 
     return (

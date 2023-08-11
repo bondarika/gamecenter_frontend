@@ -12,12 +12,13 @@ import './index.scss';
 export const Registration = () => {
     // хук от effector, дает доступ к состоянию приложения
     const { data } = useStore($authStore);
-
     const redirect = useNavigate();
 
     // хук срабатывает когда изменяется информация об авторизации
     React.useEffect(() => {
-        if (data?.type === 'participant') {
+        if (data?.type && !localStorage.getItem('agreed')) {
+            redirect('/welcome')
+        } else if (data?.type === 'participant') {
             redirect('/participant');
         } else if (data?.type === 'curator') {
             redirect('/curator');

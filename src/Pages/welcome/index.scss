@@ -1,0 +1,64 @@
+.welcome-page {
+    background-color: #eee;
+    padding: 24px;
+
+    border-radius: 24px;
+
+    &__title {
+        font-family: SFMono;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 36px;
+        text-align: center;
+
+        margin-bottom: 16px;
+    }
+
+    &__subtitle {
+        display: block;
+
+        color: #666;
+        font-family: SFProDisplay;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 125%;
+        letter-spacing: 0.28px;
+
+        margin-bottom: 16px;
+    }
+
+    &__scroll-block {
+        background: #ddd;
+        border-radius: 12px;
+        padding: 16px;
+
+        max-height: 400px;
+        overflow: scroll;
+
+        margin-bottom: 16px;
+    }
+
+    &__ref-title {
+        color: #4a98dd;
+        font-family: SFProDisplay;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 18px;
+
+        margin-bottom: 12px;
+    }
+
+    &__ref-paragraph {
+        font-family: SFProDisplay;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 125%;
+
+        margin-bottom: 12px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

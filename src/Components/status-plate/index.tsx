@@ -4,10 +4,11 @@ import { useMedia } from 'react-use';
 import { bem } from '../../utils/bem';
 import { Logo } from '../logo';
 
-import './index.scss';
 import { StatusPlateTime } from './__time';
 import { StatusPlateLocations } from './__locations';
 import { StatusPlatePoints } from './__points';
+
+import './index.scss';
 
 interface Props {
     type: 'participant' | 'curator';

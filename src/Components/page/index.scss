@@ -1,26 +1,31 @@
 .page {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 
-  min-width: 100%;
-  min-height: 100vh;
+    min-width: 100%;
+    min-height: 100vh;
 
-  box-sizing: border-box;
-  padding: 84px 24px 0 24px;
+    box-sizing: border-box;
+    padding: 24px;
 
-  background: #DDDDDD url("./pattern.png");
-  background-size: contain;
+    background: #dddddd url('./pattern.png');
+    background-size: contain;
 
-  &__content {
-    max-width: 600px;
-  }
-
-  @media screen and (max-width: 600px){
     &__content {
-      max-width: 100%;
+        max-width: 600px;
     }
-    .registration-form__input, .registration-form__input:-webkit-autofill, .registration-form__submit {
-      font-size: unset;
+
+    @media screen and (max-width: 600px) {
+        &__content {
+            max-width: 100%;
+        }
+
+        padding: 24px 12px;
+
+        .registration-form__input,
+        .registration-form__input:-webkit-autofill,
+        .registration-form__submit {
+            font-size: unset;
+        }
     }
-  }
 }
