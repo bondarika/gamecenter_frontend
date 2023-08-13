@@ -1,4 +1,5 @@
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
+import { marked } from 'marked';
 import cx from 'classnames';
 
 import { bem } from '../../utils/bem';
@@ -16,10 +17,12 @@ interface Props {
 const b = bem('brief-article');
 
 export const BriefArticle = ({ mix, color, title, markdown, image }: Props) => {
+    const text = marked.parse(markdown);
+
     return (
         <div className={cx(b(null, { color }), mix)}>
             <h3 className={b('title')}>{title}</h3>
-            <div className={b('content')}>{markdown}</div>
+            <div className={b('content')} dangerouslySetInnerHTML={{ __html: text }} />
             {image && <img className={b('image')} src={image} />}
         </div>
     );
