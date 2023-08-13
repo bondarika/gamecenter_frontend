@@ -9,14 +9,14 @@
 
     В Components/status-plate есть примеры
 */
-export const bem = (root: string) => (block?: string, modificators?: any) => {
+export const bem = (root: string) => (block?: string | null, modificators?: any) => {
     // тут только есть баг, что модификаторы не смогут случится, если не передан block
 
-    if (!block) {
+    if (!block && !modificators) {
         return root;
     }
 
-    const prefix = `${root}__${block}`;
+    const prefix = block ? `${root}__${block}` : root;
 
     if (!modificators) {
         return prefix;

@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 
 import { bem } from '../../utils/bem';
 
@@ -21,7 +22,7 @@ export const PopupPlate = ({ title, status, numberic, defaultExpanded, children,
     const handleExpand = () => setExpanded((val) => !val);
 
     return (
-        <div className={`popup-plate popup-plate_status_${status} ${mix ? mix : ''}`}>
+        <div className={cx(b(null, { status }), mix)}>
             <div className={b('controls')} onClick={handleExpand}>
                 <div className={b('status-badge', { status })} data-numberic={numberic} />
 

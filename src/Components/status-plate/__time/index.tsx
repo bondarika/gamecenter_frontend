@@ -6,7 +6,7 @@ import { b } from '../index';
 const getTimeDifference = (time: Date) => time.getTime() - new Date().getTime();
 
 export const StatusPlateTime = () => {
-    const endTime = new Date('2023-07-28'); // берем время, полученное с бэка и сохранное в стор
+    const endTime = new Date('2023-08-14'); // берем время, полученное с бэка и сохранное в стор
 
     const [time, setTime] = React.useState('--:--:--');
 
@@ -14,12 +14,12 @@ export const StatusPlateTime = () => {
         const interval: ReturnType<typeof setInterval> = setInterval(() => {
             const timeDiff = getTimeDifference(endTime);
 
-            if (timeDiff > 0) { // значит квест закончился
+            if (timeDiff < 0) { // значит квест закончился
                 setTime(parseTime(0));
                 return clearInterval(interval);
             }
 
-            setTime(parseTime(-timeDiff)); // берем минус, тк идет обратный отсчет
+            setTime(parseTime(timeDiff)); // берем минус, тк идет обратный отсчет
         }, 1000);
     }, []); // здесь пустой массив, чтобы эффект случился только при первом рендере
 
