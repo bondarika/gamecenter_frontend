@@ -18,7 +18,7 @@
     &__subtitle {
         margin-top: 24px;
 
-        font-family: SFMono;
+        font-family: SFMono, sans-serif;
         font-size: 24px;
         line-height: 28px;
 
@@ -29,7 +29,7 @@
         font-weight: 700;
         font-size: 32px;
         line-height: 36px;
-        font-family: SFMono;
+        font-family: SFMono, sans-serif;
         color: #111111;
     }
 
@@ -57,7 +57,7 @@
         transition: box-shadow 300ms ease-out;
         will-change: box-shadow;
 
-        font-family: SFProRounded, serif;
+        font-family: SFProRounded, sans-serif;
 
         &:focus {
             box-shadow:

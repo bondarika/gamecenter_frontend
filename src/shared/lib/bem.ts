@@ -9,17 +9,17 @@
 
     В Components/status-plate есть примеры
 */
-export const bem = (root: string) => (block?: string | null, modificators?: any) => {
+export const bem = (root: string) => (block?: string | null, modificators?: Record<string, any> | null, mix?: string) => {
     // тут только есть баг, что модификаторы не смогут случится, если не передан block
 
     if (!block && !modificators) {
-        return root;
+        return `${root} ${mix ? mix : ''}`;
     }
 
     const prefix = block ? `${root}__${block}` : root;
 
     if (!modificators) {
-        return prefix;
+        return `${prefix} ${mix ? mix : ''}`;
     }
 
     let resultString = prefix;
@@ -36,5 +36,5 @@ export const bem = (root: string) => (block?: string | null, modificators?: any)
         }
     }
 
-    return resultString;
+    return `${resultString} ${mix ? mix : ''}`;
 };

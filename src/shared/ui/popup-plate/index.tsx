@@ -7,22 +7,27 @@ import './index.scss';
 
 interface Props {
     title: string;
-    status: 'finished' | 'locked' | 'active';
+    status: 'finished' | 'locked' | 'active' | 'finish-stantion';
     numberic?: number;
     defaultExpanded?: boolean;
     children?: React.ReactNode;
     mix?: string;
+    color: 'white' | 'gray';
 }
 
 const b = bem('popup-plate');
 
-export const PopupPlate = ({ title, status, numberic, defaultExpanded, children, mix }: Props) => {
+export const PopupPlate = ({ title, status, numberic, defaultExpanded, children, mix, color }: Props) => {
     const [expanded, setExpanded] = React.useState(status === 'active' && (defaultExpanded ?? false));
 
-    const handleExpand = () => setExpanded((val) => !val);
+    const handleExpand = () => {
+        if (status === 'active' || status === 'finish-stantion') {
+            setExpanded((val) => !val);
+        }
+    };
 
     return (
-        <div className={cx(b(null, { status }), mix)}>
+        <div className={cx(b(null, { status, color }), mix)}>
             <div className={b('controls')} onClick={handleExpand}>
                 <div className={b('status-badge', { status })} data-numberic={numberic} />
 

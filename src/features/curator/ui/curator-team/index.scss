@@ -1,0 +1,68 @@
+.curator-team {
+    &__controls {
+        display: flex;
+    }
+
+    &__control {
+        width: 36px;
+        margin-right: 8px;
+    }
+
+    &__timer,
+    &__stantion-time {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        height: 36px;
+        flex-grow: 1;
+
+        border-radius: 8px;
+    }
+
+    &__timer {
+        font-weight: 600;
+        font-size: 18px;
+        color: #537729;
+
+        width: 160px;
+
+        margin-right: 8px;
+        background-color: #92cf4a;
+
+        &_too-much {
+            background-color: #fa7392;
+        }
+    }
+
+    &__stantion-time {
+        font-weight: 600;
+        font-size: 18px;
+        color: #888888;
+        background-color: #ddd;
+        padding: 0 8px;
+
+        svg {
+            margin-right: 8px;
+        }
+
+        span#mobile-none {
+            margin-left: 4px;
+        }
+
+        @media screen and (max-width: 380px) {
+            font-size: 16px;
+
+            svg {
+                width: 18px;
+                height: 18px;
+
+                margin-right: 4px;
+            }
+
+            span#mobile-none {
+                display: none;
+            }
+        }
+    }
+}

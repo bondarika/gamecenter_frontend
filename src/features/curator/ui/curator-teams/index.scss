@@ -1,3 +1,15 @@
 .curator-teams {
-    
+    padding: 12px;
+
+    background-color: #eee;
+
+    border-radius: 24px;
+
+    &__content-wrapper {
+        margin-bottom: 12px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 }

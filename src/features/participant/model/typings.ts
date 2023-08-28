@@ -4,4 +4,5 @@ export interface Location {
     status: 'finished' | 'locked' | 'active';
     contentText: string;
     contentImage: string;
+    questionText: string;
 }

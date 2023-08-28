@@ -1,23 +1,41 @@
 .button {
-    height: 48px;
     width: 100%;
     outline: none;
     border: none;
-    border-radius: 16px;
 
     cursor: pointer;
 
-    font-family: SFProRounded, serif;
+    font-family: SFProRounded, sans-serif;
     font-size: 24px;
     font-weight: 500;
     line-height: 16px;
 
     transition: 0.2s;
 
-    &_blue {
+    &_color_blue {
         background: #6bbaff;
 
         color: #265178;
+    }
+
+    &_color_orange {
+        background: #F28B53;
+
+        color: #853D16;
+    }
+
+    &_size_m {
+        height: 48px;
+        min-width: 48px;
+
+        border-radius: 16px;
+    }
+
+    &_size_s {
+        height: 36px;
+        min-width: 36px;
+
+        border-radius: 8px;
     }
 
     &:disabled {
@@ -25,6 +43,10 @@
         color: #888888;
 
         cursor: default;
+
+        svg {
+            fill: #888888;
+        }
     }
 
     &:active {

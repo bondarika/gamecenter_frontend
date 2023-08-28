@@ -3,7 +3,8 @@
     justify-content: center;
 
     min-width: 100%;
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
 
     box-sizing: border-box;
     padding: 24px;
@@ -12,7 +13,7 @@
     background-size: contain;
 
     &__content {
-        max-width: 600px;
+        width: 600px;
     }
 
     @media screen and (max-width: 600px) {

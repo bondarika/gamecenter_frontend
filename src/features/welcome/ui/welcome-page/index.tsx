@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -35,10 +35,16 @@ export const WelcomePage = () => {
     };
 
     const handleScroll = () => {
-        if (btnDisabled) { // если еще не долистал до конца
+        if (btnDisabled) {
+            // если еще не долистал до конца
             setBtnDisabled(!getIsScrolledToBottom(scrollBlockRef?.current));
         }
     };
+
+    // если блок по дефолту виден уже на полную
+    useEffect(() => {
+        setTimeout(() => setBtnDisabled(!getIsScrolledToBottom(scrollBlockRef?.current)), 50);
+    }, []);
 
     return (
         <Page>

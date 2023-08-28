@@ -1,3 +1,11 @@
 .participant-page__locations {
     margin-top: 12px;
+
+    max-height: calc(100vh - 200px); // отступы плашки и прочее
+    overflow: scroll;
+    box-sizing: border-box;
+
+    @media screen and (max-width: 385px) {
+        max-height: calc(100vh - 248px);
+    }
 }

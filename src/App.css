@@ -28,6 +28,6 @@
 
 /* самый часто встречающийся шрифт */
 html {
-    font-family: SFProDisplay;
+    font-family: SFProDisplay, sans-serif;
     color: #111111;
 }

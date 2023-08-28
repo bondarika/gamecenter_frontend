@@ -1,5 +1,6 @@
 import React from 'react';
-import cx from 'classnames';
+
+import { bem } from '../../lib';
 
 import './index.scss';
 
@@ -8,11 +9,14 @@ interface Props extends React.PropsWithChildren {
     mix?: string;
     onClick: () => void;
     color?: 'blue' | 'orange';
+    size?: 's' | 'm';
 }
 
-export const Button = ({ disabled, mix, onClick, color = 'blue', children }: Props) => {
+const b = bem('button');
+
+export const Button = ({ disabled, mix, onClick, color = 'blue', children, size = 'm' }: Props) => {
     return (
-        <button className={cx('button', `button_${color}`, mix)} onClick={onClick} disabled={disabled}>
+        <button className={b(null, { color, size }, mix)} onClick={onClick} disabled={disabled}>
             {children}
         </button>
     );

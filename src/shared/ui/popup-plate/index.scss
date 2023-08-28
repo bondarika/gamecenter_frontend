@@ -2,7 +2,13 @@
     padding: 16px;
     border-radius: 12px;
 
-    background-color: #ddd;
+    &_color_gray {
+        background-color: #ddd;
+    }
+
+    &_color_white {
+        background-color: #eee;
+    }
 
     &__controls {
         display: flex;
@@ -25,9 +31,10 @@
         margin-left: auto;
 
         transition: transform 100ms ease-in-out;
+        transform: rotate(180deg);
 
         &_expanded {
-            transform: rotate(180deg);
+            transform: rotate(0deg);
         }
     }
 
@@ -46,23 +53,8 @@
         margin-top: 24px;
     }
 
-    &_status_finished {
-        .popup-plate__status-badge::before {
-            content: url('./finished.svg');
-
-            background-color: #92cf4a;
-        }
-    }
-
-    &_status_locked {
-        .popup-plate__status-badge::before {
-            content: url('./locked.svg');
-
-            background-color: #888888;
-        }
-    }
-
-    &_status_active {
+    &_status_active,
+    &_status_finish-stantion {
         .popup-plate {
             &__controls {
                 cursor: pointer;
@@ -81,12 +73,36 @@
 
                 background-color: #6bbaff;
 
-                font-family: SFProRounded;
+                font-family: SFProRounded, sans-serif;
                 font-weight: 700;
                 font-size: 16px;
 
                 color: #dddddd;
             }
+        }
+    }
+
+    &_status_finish-stantion {
+        .popup-plate__status-badge::before {
+            content: url('./finish-stantion.svg');
+
+            background-color: #6bbaff;
+        }
+    }
+
+    &_status_finished {
+        .popup-plate__status-badge::before {
+            content: url('./finished.svg');
+
+            background-color: #92cf4a;
+        }
+    }
+
+    &_status_locked {
+        .popup-plate__status-badge::before {
+            content: url('./locked.svg');
+
+            background-color: #888888;
         }
     }
 }

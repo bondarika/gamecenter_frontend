@@ -1,11 +1,21 @@
 .welcome-page {
-    background-color: #eee;
-    padding: 24px;
+    display: flex;
+    flex-direction: column;
 
+    max-height: calc(100vh - 120px);
+    padding: 24px;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    background-color: #eee;
     border-radius: 24px;
 
+    .button {
+        flex-shrink: 0;
+    }
+
     &__title {
-        font-family: SFMono;
+        font-family: SFMono, sans-serif;
         font-size: 32px;
         font-style: normal;
         font-weight: 700;
@@ -19,7 +29,7 @@
         display: block;
 
         color: #666;
-        font-family: SFProDisplay;
+        font-family: SFProDisplay, sans-serif;
         font-size: 14px;
         font-weight: 500;
         line-height: 125%;
@@ -29,6 +39,8 @@
     }
 
     &__scroll-block {
+        flex-shrink: 1;
+
         border-radius: 12px;
 
         max-height: 430px;

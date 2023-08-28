@@ -1,3 +1,12 @@
-.curator-cabinet__teams {
+.curator-page__teams {
     margin-top: 12px;
+
+    max-height: calc(100vh - 200px); // отступы плашки и прочее
+    overflow: scroll;
+
+    box-sizing: border-box;
+
+    @media screen and (max-width: 325px) {
+        max-height: calc(100vh - 248px);
+    }
 }
