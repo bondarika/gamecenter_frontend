@@ -1,10 +1,12 @@
 import React from 'react';
+import { useUnit } from 'effector-react';
+
+import { $teamsStore } from '../../../../entities/participant-team';
 
 import { b } from '../index';
 
 export const StatusPlatePoints = () => {
-    // parse points
-    const points = '50';
+    const { team } = useUnit($teamsStore);
 
     return (
         <div className={b('block', { orange: true })}>
@@ -18,7 +20,7 @@ export const StatusPlatePoints = () => {
                     fill="#F28B53"
                 />
             </svg>
-            {points}
+            {team?.score}
         </div>
     );
 };

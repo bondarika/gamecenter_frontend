@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import cx from 'classnames';
 
 import { bem } from '../../lib';
@@ -25,6 +25,12 @@ export const PopupPlate = ({ title, status, numberic, defaultExpanded, children,
             setExpanded((val) => !val);
         }
     };
+
+    useEffect(() => {
+        if (status !== 'active') {
+            setExpanded(false);
+        }
+    }, [status]);
 
     return (
         <div className={cx(b(null, { status, color }), mix)}>

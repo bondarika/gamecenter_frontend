@@ -18,16 +18,16 @@ export const b = bem('curator-teams');
 const finished = 2;
 
 export const CuratorTeams = ({ mix }: Props) => {
-    const teams: ParticipantTeam[] = [
-        { id: 1, score: 100, teamname: 'боб', password: '123' },
-        { id: 2, score: 100, teamname: 'вол', password: '123' },
-        { id: 3, score: 100, teamname: 'док', password: '123' },
-        { id: 4, score: 100, teamname: 'ром', password: '123' },
-    ];
+    // const teams: ParticipantTeam[] = [
+    //     { id: 1, score: 100, teamname: 'боб', password: '123' },
+    //     { id: 2, score: 100, teamname: 'вол', password: '123' },
+    //     { id: 3, score: 100, teamname: 'док', password: '123' },
+    //     { id: 4, score: 100, teamname: 'ром', password: '123' },
+    // ];
 
     return (
         <div className={cx(b(), mix)}>
-            {teams.map((team, index) => {
+            {/* {teams.map((team, index) => {
                 const { teamname, id } = team;
 
                 if (index < finished) {
@@ -54,7 +54,7 @@ export const CuratorTeams = ({ mix }: Props) => {
                         <CuratorTeam team={team} stantionTime={20 * 60 * 1000} />
                     </PopupPlate>
                 );
-            })}
+            })} */}
         </div>
     );
 };

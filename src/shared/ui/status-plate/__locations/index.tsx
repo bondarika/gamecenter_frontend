@@ -1,10 +1,12 @@
 import React from 'react';
+import { useUnit } from 'effector-react';
+
+import { $teamsStore } from '../../../../entities/participant-team';
 
 import { b } from '../index';
 
 export const StatusPlateLocations = () => {
-    // parse locations
-    const locations = '2/10';
+    const { team } = useUnit($teamsStore);
 
     return (
         <div className={b('block')}>
@@ -29,7 +31,7 @@ export const StatusPlateLocations = () => {
                 />
             </svg>
 
-            {locations}
+            {team?.current_station} / 10
         </div>
     );
 };

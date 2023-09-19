@@ -1,26 +1,35 @@
 import { createStore, createEffect, createEvent } from 'effector';
 
-import type { AuthData, AuthStore } from './typings';
+import { getMe } from '../../../entities/user';
+import { post, setAuthToken } from '../../../shared/lib';
 
-export const $authStore = createStore<AuthStore>({});
+export const $authStore = createStore<{ error: boolean }>({ error: false });
 
-export const postCheckAuth = createEffect((payload: { login: string; password: string }) => {
+export const postCheckAuth = createEffect(async (payload: { username: string; password: string }) => {
     setNoError();
 
-    // фиктивная штучка, чтоб можно было без бэка логиниться
-    return new Promise<AuthData>((resolve, reject) => {
-        setTimeout(() => {
-            resolve({ type: 'curator' });
-        }, 3000);
-    });
+    try {
+        const { access } = (await post('/token/', payload)) as { access: string; refresh: string };
+        if (!access) {
+            throw Error();
+        }
+
+        setAuthToken(access);
+
+        await getMe();
+    } catch (e) {
+        setError();
+    }
 });
 
-$authStore.on(postCheckAuth.doneData, (store, res: AuthData) => {
-    return { data: res, error: false };
+export const setError = createEvent();
+
+$authStore.on(setError, (store) => {
+    store.error = true;
 });
 
 export const setNoError = createEvent();
 
 $authStore.on(setNoError, (store) => {
-    return { data: store.data, error: false };
+    store.error = false;
 });

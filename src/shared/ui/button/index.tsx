@@ -7,7 +7,7 @@ import './index.scss';
 interface Props extends React.PropsWithChildren {
     disabled?: boolean;
     mix?: string;
-    onClick: () => void;
+    onClick?: () => void;
     color?: 'blue' | 'orange';
     size?: 's' | 'm';
 }

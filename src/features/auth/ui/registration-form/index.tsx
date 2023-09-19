@@ -1,28 +1,24 @@
 import React from 'react';
-import { useStore } from 'effector-react';
+import { useUnit } from 'effector-react';
 
-import { Button } from '../../../../shared/ui/button'
-import { Logo } from '../../../../shared/ui/logo'
+import { Button } from '../../../../shared/ui/button';
+import { Logo } from '../../../../shared/ui/logo';
 
+import { getMe } from '../../../../entities/user';
 import { $authStore, postCheckAuth } from '../../model/store';
 
 import './index.scss';
 
 export const RegistrationForm = () => {
-    const [login, setLogin] = React.useState('');
+    const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
 
-    const [pending, setPending] = React.useState(false);
+    const { error } = useUnit($authStore);
+    const postCheckAuthPending = useUnit(postCheckAuth.pending);
+    const getMePending = useUnit(getMe.pending);
+    const pending = postCheckAuthPending || getMePending;
 
-    const { error } = useStore($authStore);
-
-    const handleSubmit = async () => {
-        setPending(true);
-
-        await postCheckAuth({ login, password });
-
-        setPending(false);
-    }
+    const handleSubmit = () => postCheckAuth({ username, password });
 
     // Есть прикол, что автозаполненные браузером поля не триггерят onChange
     // и кнопка submit остается disabled, пока пользователь не кликнет по полю
@@ -35,14 +31,29 @@ export const RegistrationForm = () => {
             <div className="registration-form__controls">
                 {/* чтобы браузер сохранил логин оказывается нужно положить name="login" */}
                 {/* иначе сохраняется только поле с паролем */}
-                <input className="registration-form__input" placeholder="логин" value={login} onChange={e => setLogin(e.target.value)} type="text" name="login" />
-                <input className="registration-form__input" placeholder="пароль" value={password} onChange={e => setPassword(e.target.value)} type="password" />
+                <input
+                    className="registration-form__input"
+                    placeholder="логин"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    type="text"
+                    name="login"
+                />
+                <input
+                    className="registration-form__input"
+                    placeholder="пароль"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    type="password"
+                />
 
-                <Button onClick={handleSubmit} disabled={pending || !login || !password}>ГОТОВО</Button>
+                <Button onClick={handleSubmit} disabled={pending || !username || !password}>
+                    ГОТОВО
+                </Button>
             </div>
 
             {/* сократил текст из макета, иначе получается очень мелко */}
             {error && <div className="registration-form__error">неверный логин или пароль</div>}
         </div>
     );
-}
+};

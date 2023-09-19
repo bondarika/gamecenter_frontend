@@ -7,6 +7,7 @@ import { CuratorTeams } from '../curator-teams';
 
 import './index.scss';
 
+// znv-asb-Jvb-ZBK
 export const CuratorPage = () => {
     return (
         <Page>

@@ -24,14 +24,14 @@ export const StatusPlate = ({ type }: Props) => {
             {isSmallMobile ? (
                 <div className={b('flex-center')}>
                     <Logo mix={b('logo')} />
-                    <StatusPlateTime />
+                    {type === 'participant' && <StatusPlateTime />}
                 </div>
             ) : (
                 <Logo mix={b('logo')} />
             )}
 
             <div className={b('flex-center')}>
-                {!isSmallMobile && <StatusPlateTime />}
+                {!isSmallMobile && type === 'participant' && <StatusPlateTime />}
 
                 {type === 'participant' && (
                     <>

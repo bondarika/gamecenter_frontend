@@ -1,19 +1,26 @@
 import React from 'react';
+import { useUnit } from 'effector-react';
+
+import { $teamsStore } from '../../../../entities/participant-team';
 
 import { parseTime } from '../../../lib';
 
 import { b } from '../index';
 
 export const StatusPlateTime = () => {
-    const endTime = new Date('2023-08-14'); // берем время, полученное с бэка и сохранное в стор
+    const { team } = useUnit($teamsStore);
+    const endTime = new Date(team?.start_time || 0).getTime() / 1000 + 4 * 3600;
 
     const [time, setTime] = React.useState('--:--:--');
 
     React.useEffect(() => {
         const interval: ReturnType<typeof setInterval> = setInterval(() => {
-            const timeDiff = endTime.getTime() - new Date().getTime();
+            
+            const x = new Date().getTime();
+            debugger;
+            const timeDiff = endTime - new Date().getTime() / 1000;
 
-            if (timeDiff < 0) { // значит квест закончился
+            if (timeDiff <= 0) { // значит квест закончился
                 setTime(parseTime(0));
                 return clearInterval(interval);
             }

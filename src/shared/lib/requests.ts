@@ -1,8 +1,16 @@
 const defaultHeaders = {
-    'Content-Type': 'application/json;charset=utf-8',
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    'X-CSRFToken': '9r5OcQBCYGxC7mK2Fu02ZIhusiSy92oELWALOVF3d3wZKi6pLuetbBGBqr0U4SDb',
+    Authorization: 'Bearer {token}',
 };
 
-const API_URL = 'http://127.0.0.1:8000/api/backend';
+export const setAuthToken = (token: string) => {
+    defaultHeaders.Authorization = `Bearer ${token}`;
+    localStorage.setItem('access_token', token);
+};
+
+const API_URL = 'http://localhost:8000/api';
 
 export const get = async (path: string) => {
     const response = await fetch(API_URL + path, { method: 'GET', headers: defaultHeaders });

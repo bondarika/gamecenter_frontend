@@ -1,13 +1,12 @@
+import { useUnit } from 'effector-react';
 import React, { useRef, useState, useEffect } from 'react';
-import { useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
 
+import { $userStore } from '../../../../entities/user';
 import { bem, getIsScrolledToBottom } from '../../../../shared/lib';
 import { Page } from '../../../../shared/ui/page';
 import { Button } from '../../../../shared/ui/button';
 import { BriefArticle } from '../../../../shared/ui/brief-article';
-
-import { $authStore } from '../../../auth';
 
 import './index.scss';
 
@@ -17,20 +16,28 @@ const markdown =
     'Ждем нормального текста!\n\nЕжегодно вузы Санкт-Петербурга открывают свои двери для новых ребят из разных уголков нашей огромной страны, именно для первокурсников Организационный комитет СПбГУТ проводит свое самое масштабное мероприятие — спортивно-развлекательный квест «ИграЦентр». Цель квеста — познакомить новоиспеченных студентов с городом, его историей и культурным наследием, а также подарить заряд энергии и неповторимые эмоции!\n\nЕжегодно вузы Санкт-Петербурга открывают свои двери для новых ребят из разных уголков нашей огромной страны, именно для первокурсников Организационный комитет СПбГУТ проводит свое самое масштабное мероприятие — спортивно-развлекательный квест «ИграЦентр». Цель квеста — познакомить новоиспеченных студентов с городом, его историей и культурным наследием, а также подарить заряд энергии и неповторимые эмоции!\n\n';
 
 export const WelcomePage = () => {
-    const { data } = useStore($authStore);
+    const { me } = useUnit($userStore);
     const redirect = useNavigate();
 
     const [btnDisabled, setBtnDisabled] = useState(true);
 
     const scrollBlockRef = useRef<HTMLDivElement | null>(null);
 
+    useEffect(() => {
+        if (!me) {
+            redirect('/');
+        }
+    }, []);
+
     const handleAgreement = () => {
         localStorage.setItem('agreed', 'true');
 
-        if (data?.type === 'participant') {
+        if (me?.is_player) {
             redirect('/participant');
-        } else if (data?.type === 'curator') {
+        } else if (me?.is_curator) {
             redirect('/curator');
+        } else {
+            redirect('/');
         }
     };
 

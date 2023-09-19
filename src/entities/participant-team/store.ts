@@ -1,29 +1,29 @@
-import { createEffect, createStore } from 'effector';
+import { createStore } from 'effector';
 
-import { get, post } from '../../shared/lib';
+import { getTeam, getTeams, saveScore } from './api';
+import type { ParticipantTeam } from './typings';
 
-import { ParticipantTeam } from './typings';
+export const $teamsStore = createStore<{
+    loading: boolean;
+    team: ParticipantTeam | null;
+    allTeams: ParticipantTeam[] | null;
+}>({ loading: true, team: null, allTeams: null });
 
-export const $teamsStore = createStore<{ loading: boolean; teams: ParticipantTeam[] }>({ loading: true, teams: [] });
-
-export const getTeams = createEffect(async () => {
-    return (await get('/playerteam/')) as ParticipantTeam[];
+$teamsStore.on(getTeam.doneData, (state, myTeam) => {
+    state.loading = false;
+    state.team = myTeam;
 });
 
-$teamsStore.on(getTeams.pending, (state) => {
-    state.loading = true;
+$teamsStore.on(getTeams.doneData, (state, teams) => {
+    state.loading = false;
+    state.allTeams = teams;
 });
 
-$teamsStore.on(getTeams.doneData, (_, teams) => ({ loading: false, teams }));
-
-export const addScore = createEffect(async (team: ParticipantTeam, score: number) => {
-    return (await post(`/playerteam/${team.id}/add_score/`, { ...team, score })) as ParticipantTeam;
-});
-
-$teamsStore.on(addScore.doneData, (state, team) => {
-    const stateTeam = state.teams.find((stateTeam) => stateTeam.id === team.id);
+$teamsStore.on(saveScore.doneData, (state, updatedTeam) => {
+    const stateTeam = state.allTeams?.find((stateTeam) => stateTeam.id === updatedTeam.id);
 
     if (stateTeam) {
-        stateTeam.score = team.score;
+        stateTeam.score = updatedTeam.score;
+        stateTeam.current_station = updatedTeam.current_station;
     }
 });
