@@ -14,7 +14,7 @@ export const removeAuthToken = () => {
     localStorage.removeItem('access_token');
 };
 
-const API_URL = 'http://localhost:8000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
 
 export const get = async (path: string) => {
     const response = await fetch(API_URL + path, { method: 'GET', headers: defaultHeaders });
