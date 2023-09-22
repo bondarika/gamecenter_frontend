@@ -181,6 +181,10 @@ export const CuratorTeam = ({ team, stantion }: Props) => {
                 </Button>
                 <StatusPlatePointsRaw score={Math.max(currentPoints, 0)} />
             </div>
+
+            <span className={b('warn')}>
+                Проверьте количество баллов перед отправкой!<br />Результат нельзя будет изменить после отправки на сервер
+            </span>
         </>
     );
 };

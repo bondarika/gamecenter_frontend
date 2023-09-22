@@ -1,4 +1,4 @@
-import { useStore } from 'effector-react';
+import { useUnit } from 'effector-react';
 import React from 'react';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 
@@ -33,7 +33,7 @@ function App() {
 const Redirects = ({ children }: React.PropsWithChildren) => {
     const [shouldRender, setShouldRender] = React.useState(false);
 
-    const { me, loading } = useStore($userStore);
+    const { me, loading } = useUnit($userStore);
 
     const redirect = useNavigate();
 
@@ -61,7 +61,6 @@ const Redirects = ({ children }: React.PropsWithChildren) => {
             });
     }, []);
 
-    // FIXME добавить страницу финиша
     React.useEffect(() => {
         if (loading) {
             return;
@@ -79,7 +78,7 @@ const Redirects = ({ children }: React.PropsWithChildren) => {
         }
     }, [loading, me]);
 
-    if (!shouldRender || false) {
+    if (!shouldRender) {
         return <Page>Авторизация...</Page>;
     }
 
