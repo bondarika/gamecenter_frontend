@@ -1,6 +1,6 @@
 export interface Stantion {
     id: number;
-    time: string;
+    time: number;
     points: number;
     name: string;
     description: string;

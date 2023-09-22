@@ -12,11 +12,12 @@ interface Props {
     markdown?: string;
     image?: string;
     Footer?: React.FC;
+    FooterContent?: React.ReactNode;
 }
 
 const b = bem('brief-article');
 
-export const BriefArticle = ({ mix, color, title, markdown, image, Footer }: Props) => {
+export const BriefArticle = ({ mix, color, title, markdown, image, Footer, FooterContent }: Props) => {
     const text = markdown && markdown2html(markdown);
 
     return (
@@ -25,6 +26,7 @@ export const BriefArticle = ({ mix, color, title, markdown, image, Footer }: Pro
             {text && <div className={b('content')} dangerouslySetInnerHTML={{ __html: text }} />}
             {image && <img className={b('image')} src={image} />}
             {Footer ? <Footer /> : null}
+            {FooterContent ? FooterContent : null}
         </div>
     );
 };

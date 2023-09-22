@@ -3,7 +3,10 @@ import { createStore, createEffect, createEvent } from 'effector';
 import { getMe } from '../../../entities/user';
 import { post, setAuthToken } from '../../../shared/lib';
 
-export const $authStore = createStore<{ error: boolean }>({ error: false });
+export const $authStore = createStore<{ error: boolean; postVerifyTokenError: boolean }>({
+    error: false,
+    postVerifyTokenError: false,
+});
 
 export const postCheckAuth = createEffect(async (payload: { username: string; password: string }) => {
     setNoError();
@@ -20,6 +23,11 @@ export const postCheckAuth = createEffect(async (payload: { username: string; pa
     } catch (e) {
         setError();
     }
+});
+
+// немного тупая логика – нужно в месте вызова эффекта словить catch, чтобы редиректнуть на авторизацию
+export const postVerifyToken = createEffect(async (payload: { token: string }) => {
+    await post('/token/verify/', payload);
 });
 
 export const setError = createEvent();

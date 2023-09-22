@@ -10,10 +10,18 @@ export const setAuthToken = (token: string) => {
     localStorage.setItem('access_token', token);
 };
 
+export const removeAuthToken = () => {
+    localStorage.removeItem('access_token');
+};
+
 const API_URL = 'http://localhost:8000/api';
 
 export const get = async (path: string) => {
     const response = await fetch(API_URL + path, { method: 'GET', headers: defaultHeaders });
+
+    if (!response.ok) {
+        return Promise.reject(response);
+    }
 
     return response.json();
 };
@@ -24,6 +32,10 @@ export const post = async (path: string, body: string | object) => {
         headers: defaultHeaders,
         body: JSON.stringify(body),
     });
+
+    if (!response.ok) {
+        return Promise.reject(response);
+    }
 
     return response.json();
 };

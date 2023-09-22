@@ -25,6 +25,7 @@ export const useTimer = () => {
 
     const [started, setStarted] = React.useState(false);
     const [ended, setEnded] = React.useState(false);
+    const [extraMinutes, setExtraMinutes] = React.useState(0);
 
     const [myInterval, setMyInterval] = React.useState<NodeJS.Timer>();
 
@@ -60,6 +61,7 @@ export const useTimer = () => {
         const leftTime = timeToSpend - spentTime;
         if (leftTime <= 0) {
             setEnded(true);
+            setExtraMinutes(Math.ceil(leftTime * -1 / 60));
             setLeftTime('00:00:00');
         } else {
             setLeftTime(parseTime(leftTime));
@@ -73,6 +75,7 @@ export const useTimer = () => {
         stopTimer: handleStopTimer,
         isTimerStarted: started,
         isTimeEnded: ended,
+        extraMinutes,
         forceUpdateTimer: updateTimer,
     };
 };

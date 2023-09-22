@@ -11,8 +11,6 @@ export const $userStore = createStore<{
     me: null,
 });
 
-$userStore.on(getMe.pending, (state) => {
-    state.loading = true;
-});
+$userStore.on(getMe.pending, (state) => ({ ...state, loading: true }));
 
 $userStore.on(getMe.doneData, (_, me) => ({ me, loading: false }));

@@ -14,13 +14,10 @@ export const getTeams = createEffect(async () => {
     return (await get('/playerteam/')) as ParticipantTeam[];
 });
 
-export const saveScore = createEffect(async (team: ParticipantTeam, score: number) => {
-    // обновляем результат
-    const updatedTeam = (await post(`/playerteam/${team.id}/add_score/`, { ...team, score })) as ParticipantTeam;
-
-    // обновляет текущую станцию (тк сохраняем результат только при переходах на новую станцию)
-    return (await post(`/playerteam/${team.id}/set_current_station/`, {
-        ...updatedTeam,
-        current_station: updatedTeam.current_station + 1,
+export const saveScore = createEffect(async ({ team, score }: { team: ParticipantTeam; score: number }) => {
+    // обновляем результат и переводимся на новую станцию
+    return (await post(`/playerteam/${team.id}/add_score/`, {
+        ...team,
+        score,
     })) as ParticipantTeam;
 });

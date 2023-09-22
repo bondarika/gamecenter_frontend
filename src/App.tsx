@@ -4,11 +4,11 @@ import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 
 import { CuratorPage } from './features/curator';
 import { ParticipantPage } from './features/participant';
-import { RegistrationPage } from './features/auth';
+import { RegistrationPage, postVerifyToken } from './features/auth';
 import { WelcomePage } from './features/welcome';
 
 import { $userStore, getMe } from './entities/user';
-import { setAuthToken } from './shared/lib';
+import { setAuthToken, removeAuthToken } from './shared/lib';
 import { Page } from './shared/ui/page';
 
 import './App.css';
@@ -44,8 +44,19 @@ const Redirects = ({ children }: React.PropsWithChildren) => {
             return;
         }
 
-        setAuthToken(accessToken);
-        getMe();
+        postVerifyToken({ token: accessToken })
+            .then(async () => {
+                setAuthToken(accessToken);
+
+                await getMe();
+                setShouldRender(true);
+            })
+            .catch(() => {
+                removeAuthToken();
+
+                setShouldRender(true);
+                redirect('/');
+            });
     }, []);
 
     React.useEffect(() => {
@@ -66,7 +77,7 @@ const Redirects = ({ children }: React.PropsWithChildren) => {
     }, [loading, me]);
 
     if (!shouldRender) {
-        return <Page>Загрузка</Page>;
+        return <Page>Авторизация...</Page>;
     }
 
     return <>{children}</>;

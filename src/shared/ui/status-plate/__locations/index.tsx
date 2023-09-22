@@ -1,15 +1,16 @@
 import React from 'react';
 import { useUnit } from 'effector-react';
+import cx from 'classnames';
 
 import { $teamsStore } from '../../../../entities/participant-team';
 
-import { b } from '../index';
+import { b } from '../status-plate';
 
 export const StatusPlateLocations = () => {
     const { team } = useUnit($teamsStore);
 
     return (
-        <div className={b('block')}>
+        <div className={cx(b('block'), b('wrapped-block'))}>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
                 <path
                     fillRule="evenodd"
@@ -30,8 +31,7 @@ export const StatusPlateLocations = () => {
                     strokeLinejoin="round"
                 />
             </svg>
-
-            {team?.current_station} / 10
+            {(team?.current_station || 1) - 1} / 10
         </div>
     );
 };

@@ -11,6 +11,7 @@
 
     background: #dddddd url('./pattern.png');
     background-size: contain;
+    background-attachment: fixed;
 
     &__content {
         width: 600px;

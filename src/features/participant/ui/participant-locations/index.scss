@@ -1,4 +1,10 @@
 .participant-locations {
+    padding: 12px;
+
+    background-color: #eee;
+
+    border-radius: 24px;
+
     &__content-wrapper {
         margin-bottom: 12px;
 
@@ -9,5 +15,25 @@
 
     &__question {
         margin-top: 8px;
+    }
+
+    &__time-plate {
+        // background-color: #EEEEEE;
+        margin-right: 8px;
+    }
+
+    &__finish-button {
+        align-items: center;
+        width: fit-content;
+        padding: 12px 16px;
+        font-size: 18px;
+        line-height: 0;
+    }
+
+    &__finish-text {
+        margin-top: 12px;
+        color: #666666;
+        font-size: 16px;
+        font-weight: 500;
     }
 }

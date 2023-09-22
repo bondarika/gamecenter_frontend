@@ -1,13 +1,16 @@
 import cx from 'classnames';
 import { useUnit } from 'effector-react';
-import React, { useMemo } from 'react';
+import React from 'react';
 
-import { $stantionsStore } from '../../../../entities/stantion';
 import { $teamsStore } from '../../../../entities/participant-team';
 
+import { plural, bem } from '../../../../shared/lib';
 import { BriefArticle } from '../../../../shared/ui/brief-article';
 import { PopupPlate } from '../../../../shared/ui/popup-plate';
-import { bem } from '../../../../shared/lib/bem';
+import { StatusPlatePointsRaw, StatusPlateTimeRaw } from '../../../../shared/ui/status-plate/';
+import { Button } from '../../../../shared/ui/button';
+
+import { useOrderedStantionsById } from '../../lib/hooks';
 
 import './index.scss';
 
@@ -18,22 +21,13 @@ interface Props {
 }
 
 export const ParticipantLocations = ({ mix }: Props) => {
-    const { stantionsOrder, stantions } = useUnit($stantionsStore);
     const { team } = useUnit($teamsStore);
 
-    const teamStantionsOrder = useMemo(
-        () => stantionsOrder?.find(({ id }) => id === team?.stations),
-        [team, stantionsOrder],
-    );
-    const orderedStantions = useMemo(
-        () => teamStantionsOrder?.order.map((stantionId) => stantions?.[stantionId]),
-        [stantions, teamStantionsOrder],
-    );
+    const orderedStantions = useOrderedStantionsById(team?.stations);
 
-    // МОК
-    if (team) {
-        team.current_station = 6;
-    }
+    const handleFinishButton = () => {
+        // FIXME
+    };
 
     return (
         <div className={cx(b(), mix)}>
@@ -62,7 +56,7 @@ export const ParticipantLocations = ({ mix }: Props) => {
                             status={status}
                             numberic={index}
                             key={id}
-                            color="white"
+                            color="gray"
                         />
                     );
                 }
@@ -71,14 +65,31 @@ export const ParticipantLocations = ({ mix }: Props) => {
                     <PopupPlate
                         mix={b('content-wrapper')}
                         title={name}
-                        status={index === orderedStantions.length ? 'finish-stantion' : 'active'}
+                        status={team?.current_station === 10 ? 'finish-stantion' : 'active'}
                         numberic={index}
                         key={id}
                         defaultExpanded={true}
-                        color="white"
+                        color="gray"
                     >
-                        <BriefArticle title="Историческая справка" color="gray" markdown={description} image={image} />
-                        <BriefArticle title="Задание" markdown={assignment} color="gray" mix={b('question')} />
+                        <BriefArticle title="Историческая справка" color="white" markdown={description} image={image} />
+                        <BriefArticle
+                            title="Задание"
+                            markdown={assignment}
+                            color="white"
+                            mix={b('question')}
+                            Footer={() => (
+                                <div style={{ display: 'flex', marginTop: 12 }}>
+                                    <StatusPlateTimeRaw
+                                        time={`${stantion.points} ${plural(
+                                            ['минута', 'минуты', 'минут'],
+                                            stantion.points,
+                                        )}`}
+                                        mix={b('time-plate')}
+                                    />
+                                    <StatusPlatePointsRaw score={stantion.points} />
+                                </div>
+                            )}
+                        />
                     </PopupPlate>
                 );
             })}

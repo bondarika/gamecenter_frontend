@@ -6,6 +6,10 @@
     box-sizing: border-box;
     padding: 24px;
 
+    max-height: calc(100vh - 120px); // отступы плашки и прочее
+    overflow: scroll;
+    box-sizing: border-box;
+    
     border-radius: 24px;
 
     background: #eeeeee;

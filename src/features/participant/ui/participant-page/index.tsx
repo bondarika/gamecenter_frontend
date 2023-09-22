@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useUnit } from 'effector-react';
-import { redirect } from 'react-router';
 
 import { $userStore } from '../../../../entities/user';
 import { $teamsStore, getTeam } from '../../../../entities/participant-team';
@@ -19,13 +18,13 @@ export const ParticipantPage = () => {
     const { loading: tLoading } = useUnit($teamsStore);
     const { loading: sLoading } = useUnit($stantionsStore);
 
-    React.useEffect(() => {
+    useEffect(() => {
         getTeam(me!.user_id);
         getStantions();
     }, []);
 
     if (tLoading || sLoading) {
-        return <Page>загрузка</Page>;
+        return <Page>Загрузка...</Page>;
     }
 
     return (

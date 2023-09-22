@@ -27,8 +27,6 @@
         align-items: center;
 
         height: 36px;
-        margin-right: 8px;
-        margin-bottom: 8px;
         padding: 0 8px;
         border-radius: 8px;
 
@@ -46,10 +44,23 @@
         }
     }
 
+    &__wrapped-block {
+        margin-right: 8px;
+        margin-bottom: 8px;
+    }
+
     &__flex-center {
         display: flex;
         justify-content: center;
 
         flex-wrap: wrap;
+    }
+
+    &__stantion-name  {
+        font-family: SFMono, sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 9px;
+        margin-right: 8px;
     }
 }
