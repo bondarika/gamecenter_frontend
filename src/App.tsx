@@ -1,4 +1,4 @@
-import { useUnit } from 'effector-react';
+import { useStore } from 'effector-react';
 import React from 'react';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 
@@ -6,6 +6,7 @@ import { CuratorPage } from './features/curator';
 import { ParticipantPage } from './features/participant';
 import { RegistrationPage, postVerifyToken } from './features/auth';
 import { WelcomePage } from './features/welcome';
+import { FinishPage } from './features/finish';
 
 import { $userStore, getMe } from './entities/user';
 import { setAuthToken, removeAuthToken } from './shared/lib';
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/welcome" element={<WelcomePage />} />
                     <Route path="/participant" element={<ParticipantPage />} />
                     <Route path="/curator" element={<CuratorPage />} />
+                    <Route path="/finisher" element={<FinishPage />} />
                 </Routes>
             </Redirects>
         </BrowserRouter>
@@ -31,7 +33,7 @@ function App() {
 const Redirects = ({ children }: React.PropsWithChildren) => {
     const [shouldRender, setShouldRender] = React.useState(false);
 
-    const { me, loading } = useUnit($userStore);
+    const { me, loading } = useStore($userStore);
 
     const redirect = useNavigate();
 
@@ -59,6 +61,7 @@ const Redirects = ({ children }: React.PropsWithChildren) => {
             });
     }, []);
 
+    // FIXME добавить страницу финиша
     React.useEffect(() => {
         if (loading) {
             return;
@@ -76,7 +79,7 @@ const Redirects = ({ children }: React.PropsWithChildren) => {
         }
     }, [loading, me]);
 
-    if (!shouldRender) {
+    if (!shouldRender || false) {
         return <Page>Авторизация...</Page>;
     }
 

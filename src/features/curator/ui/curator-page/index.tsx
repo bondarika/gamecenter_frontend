@@ -3,7 +3,6 @@ import { useUnit } from 'effector-react';
 
 import { $userStore } from '../../../../entities/user';
 import { $teamsStore, getTeams } from '../../../../entities/participant-team';
-import { $curatorStore, getCurator } from '../../../../entities/curator';
 import { $stantionsStore, getStantions } from '../../../../entities/stantion';
 
 import { Page } from '../../../../shared/ui/page';
@@ -15,18 +14,13 @@ import './index.scss';
 
 // znv-asb-Jvb-ZBK
 export const CuratorPage = () => {
-    const { me } = useUnit($userStore);
-
     const { loading: tLoading } = useUnit($teamsStore);
     const { loading: sLoading } = useUnit($stantionsStore);
-    const { loading: cLoading } = useUnit($curatorStore);
 
     const t2Loading = useUnit(getTeams.pending);
     const s2Loading = useUnit(getStantions.pending);
 
     React.useEffect(() => {
-        getCurator(me!.user_id);
-
         if (!t2Loading) {
             getTeams();
         }
@@ -36,7 +30,7 @@ export const CuratorPage = () => {
         }
     }, []);
 
-    if (tLoading || sLoading || cLoading) {
+    if (tLoading || sLoading) {
         return <Page>Загрузка...</Page>;
     }
 

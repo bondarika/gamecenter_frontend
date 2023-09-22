@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import { useUnit } from 'effector-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { $curatorStore } from '../../../../entities/curator';
 import { $stantionsStore } from '../../../../entities/stantion';
@@ -9,11 +9,12 @@ import { bem } from '../../../../shared/lib';
 import { PopupPlate } from '../../../../shared/ui/popup-plate';
 import { $teamsStore } from '../../../../entities/participant-team';
 
-import { useMapTeamIdToStatus } from '../../lib/hooks';
+import { useAcceptedTeamsCount, useMapTeamIdToStatus } from '../../lib/hooks';
 
 import { CuratorTeam } from '../curator-team';
 
 import './index.scss';
+import { useNavigate } from 'react-router';
 
 interface Props {
     mix?: string;
@@ -25,6 +26,15 @@ export const CuratorTeams = ({ mix }: Props) => {
     const { curator } = useUnit($curatorStore);
     const { allTeams } = useUnit($teamsStore);
     const { stantions } = useUnit($stantionsStore);
+
+    const redirect = useNavigate();
+
+    const { count, teamsCount } = useAcceptedTeamsCount(curator?.station);
+    useEffect(() => {
+        if (count === teamsCount) {
+            redirect('/finisher');
+        }
+    }, [count]);
 
     const stantion = stantions?.[curator?.station || 0];
 

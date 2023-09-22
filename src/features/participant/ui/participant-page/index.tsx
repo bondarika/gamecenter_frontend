@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { useUnit } from 'effector-react';
 
-import { $userStore } from '../../../../entities/user';
-import { $teamsStore, getTeam } from '../../../../entities/participant-team';
 import { $stantionsStore, getStantions } from '../../../../entities/stantion';
 
 import { Page } from '../../../../shared/ui/page';
@@ -13,17 +11,13 @@ import { ParticipantLocations } from '../participant-locations';
 import './index.scss';
 
 export const ParticipantPage = () => {
-    const { me } = useUnit($userStore);
-
-    const { loading: tLoading } = useUnit($teamsStore);
     const { loading: sLoading } = useUnit($stantionsStore);
 
     useEffect(() => {
-        getTeam(me!.user_id);
         getStantions();
     }, []);
 
-    if (tLoading || sLoading) {
+    if (sLoading) {
         return <Page>Загрузка...</Page>;
     }
 

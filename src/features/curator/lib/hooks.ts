@@ -25,14 +25,14 @@ export const useMapTeamIdToStantionsOrder = () => {
 export const useMapTeamIdToStatus = (stantionId?: number) => {
     const { allTeams } = useUnit($teamsStore);
 
-    if (!allTeams) {
-        return {};
-    }
-
     const mapStantionsOrderByTeamId = useMapTeamIdToStantionsOrder();
 
     // какой по порядку у каждой команды идет станция stantionId
     const teamIdToStatus: Record<ParticipantTeam['id'], 'accepted' | 'not-accepted' | 'on-prev-stantions'> = {};
+
+    if (!allTeams) {
+        return {};
+    }
 
     allTeams.forEach((team) => {
         teamIdToStatus[team.id] = 'on-prev-stantions';
@@ -57,11 +57,11 @@ export const useMapTeamIdToStatus = (stantionId?: number) => {
 export const useAcceptedTeamsCount = (stantionId?: number) => {
     const { allTeams } = useUnit($teamsStore);
 
+    const mapStantionsOrderByTeamId = useMapTeamIdToStantionsOrder();
+
     if (!stantionId || !allTeams) {
         return { count: 0, teamsCount: 0 };
     }
-
-    const mapStantionsOrderByTeamId = useMapTeamIdToStantionsOrder();
 
     const count = allTeams.reduce((prev, { id, current_station }) => {
         for (let i = 1; i < current_station; i++) {

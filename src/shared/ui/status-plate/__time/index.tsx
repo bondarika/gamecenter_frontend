@@ -1,6 +1,7 @@
 import React from 'react';
 import { useUnit } from 'effector-react';
 import cx from 'classnames';
+import { useNavigate } from 'react-router';
 
 import { $teamsStore } from '../../../../entities/participant-team';
 
@@ -14,6 +15,9 @@ export const StatusPlateTime = () => {
 
     const [time, setTime] = React.useState('--:--:--');
 
+    // это нужно использовать выше, не в shared, но продумывать дальше логику долго
+    const redirect = useNavigate();
+
     React.useEffect(() => {
         const interval: ReturnType<typeof setInterval> = setInterval(() => {
             const timeDiff = endTime - new Date().getTime() / 1000;
@@ -21,7 +25,10 @@ export const StatusPlateTime = () => {
             if (timeDiff <= 0) {
                 // значит квест закончился
                 setTime(parseTime(0));
-                return clearInterval(interval);
+
+                clearInterval(interval);
+
+                return redirect('/finisher');
             }
 
             setTime(parseTime(timeDiff)); // берем минус, тк идет обратный отсчет
@@ -31,7 +38,7 @@ export const StatusPlateTime = () => {
     return <StatusPlateTimeRaw time={time} mix={b('wrapped-block')} />;
 };
 
-export const StatusPlateTimeRaw = ({ time, mix }: { time: string, mix: string }) => (
+export const StatusPlateTimeRaw = ({ time, mix }: { time: string; mix: string }) => (
     <div className={cx(b('block'), mix)}>
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
             <path

@@ -1,0 +1,89 @@
+.finish-page {
+    &__content {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        margin-top: 12px;
+
+        max-height: calc(100vh - 200px); // отступы плашки и прочее
+        overflow: scroll;
+
+        box-sizing: border-box;
+
+        @media screen and (max-width: 400px) {
+            max-height: calc(100vh - 248px);
+        }
+
+        padding: 24px;
+        background-color: #eeeeee;
+        border-radius: 24px;
+    }
+
+    &__logo {
+        width: 140px;
+        height: 140px;
+
+        margin-bottom: 20px;
+    }
+
+    &__titles {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    &__subtitle {
+        margin-top: 4px;
+
+        font-family: SFMono, sans-serif;
+        font-size: 20px;
+        line-height: 28px;
+
+        color: #666666;
+
+        margin-bottom: 16px;
+    }
+
+    &__title {
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 36px;
+        font-family: SFMono, sans-serif;
+        color: #111111;
+    }
+
+    &__plates {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 1fr 1fr;
+
+        margin-bottom: 12px;
+    }
+
+    &__plate {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        text-align: center;
+        padding: 12px;
+        background-color: #dddddd;
+        border-radius: 12px;
+
+        span {
+            font-size: 16px;
+            font-weight: 500;
+
+            margin-bottom: 12px;
+        }
+
+        .status-plate__block {
+            margin: 0 !important;
+
+            &:not(&_orange) {
+                background-color: #eeeeee;
+            }
+        }
+    }
+}

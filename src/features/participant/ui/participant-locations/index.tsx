@@ -1,6 +1,7 @@
 import cx from 'classnames';
 import { useUnit } from 'effector-react';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
 import { $teamsStore } from '../../../../entities/participant-team';
 
@@ -8,7 +9,6 @@ import { plural, bem } from '../../../../shared/lib';
 import { BriefArticle } from '../../../../shared/ui/brief-article';
 import { PopupPlate } from '../../../../shared/ui/popup-plate';
 import { StatusPlatePointsRaw, StatusPlateTimeRaw } from '../../../../shared/ui/status-plate/';
-import { Button } from '../../../../shared/ui/button';
 
 import { useOrderedStantionsById } from '../../lib/hooks';
 
@@ -23,11 +23,14 @@ interface Props {
 export const ParticipantLocations = ({ mix }: Props) => {
     const { team } = useUnit($teamsStore);
 
+    const redirect = useNavigate();
     const orderedStantions = useOrderedStantionsById(team?.stations);
 
-    const handleFinishButton = () => {
-        // FIXME
-    };
+    useEffect(() => {
+        if (team?.current_station === 11) {
+            redirect('/finisher');
+        }
+    }, [team?.current_station]);
 
     return (
         <div className={cx(b(), mix)}>
