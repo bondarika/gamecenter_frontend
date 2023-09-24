@@ -9,9 +9,11 @@ import { parseTime } from '../../../lib';
 
 import { b } from '../status-plate';
 
+const hours = Number(process.env.REACT_APP_TIME_ON_QUEST || 5);
+
 export const StatusPlateTime = () => {
     const { team } = useUnit($teamsStore);
-    const endTime = new Date(team?.start_time || 0).getTime() / 1000 + 4 * 3600;
+    const endTime = new Date(team?.start_time || 0).getTime() / 1000 + hours * 3600;
 
     const [time, setTime] = React.useState('--:--:--');
 

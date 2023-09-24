@@ -9,12 +9,14 @@ import { StatusPlatePointsRaw } from '../../../../shared/ui/status-plate';
 import { StatusPlateLocations } from '../../../../shared/ui/status-plate/__locations';
 import { StatusPlateTime } from '../../../../shared/ui/status-plate/__time';
 
+const hours = Number(process.env.REACT_APP_TIME_ON_QUEST || 5);
+
 export const FinishBlockParticipant = () => {
     const { team } = useUnit($teamsStore);
 
     const isFullyFinished = team?.current_station === 11;
 
-    const endTime = new Date(team?.start_time || 0).getTime() / 1000 + 4 * 3600;
+    const endTime = new Date(team?.start_time || 0).getTime() / 1000 + hours * 3600;
     const isTimeEnded = endTime - new Date().getTime() / 1000 <= 0;
 
     const title = isFullyFinished ? 'Квест завершён!' : 'Время вышло!';
