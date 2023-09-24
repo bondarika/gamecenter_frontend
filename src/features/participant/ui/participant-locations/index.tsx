@@ -64,7 +64,8 @@ export const ParticipantLocations = ({ mix }: Props) => {
                     );
                 }
 
-                const imgSrc = `http://играцентр.рф/images/адмиралтейство.jpg`;
+                // const imgSrc = `http://играцентр.рф/images/адмиралтейство.jpg`;
+                const imgSrc = `http://играцентр.рф/${image}`;
 
                 return (
                     <PopupPlate
