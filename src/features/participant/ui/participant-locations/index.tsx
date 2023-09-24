@@ -64,6 +64,8 @@ export const ParticipantLocations = ({ mix }: Props) => {
                     );
                 }
 
+                const imgSrc = `http://играцентр.рф/images/адмиралтейство.jpg`;
+
                 return (
                     <PopupPlate
                         mix={b('content-wrapper')}
@@ -74,7 +76,7 @@ export const ParticipantLocations = ({ mix }: Props) => {
                         defaultExpanded={true}
                         color="gray"
                     >
-                        <BriefArticle title="Историческая справка" color="white" markdown={description} image={image} />
+                        <BriefArticle title="Историческая справка" color="white" markdown={description} image={imgSrc} />
                         <BriefArticle
                             title="Задание"
                             markdown={assignment}
