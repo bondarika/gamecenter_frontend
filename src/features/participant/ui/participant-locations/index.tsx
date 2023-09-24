@@ -28,7 +28,7 @@ export const ParticipantLocations = ({ mix }: Props) => {
 
     useEffect(() => {
         if (team?.current_station === 11) {
-            redirect('/finisher');
+            // redirect('/finisher');
         }
     }, [team?.current_station]);
 

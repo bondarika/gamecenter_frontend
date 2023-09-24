@@ -1,5 +1,5 @@
 import { useUnit } from 'effector-react';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 import { $userStore } from '../../../../entities/user';
@@ -21,6 +21,13 @@ export const FinishPage = () => {
 
     const redirect = useNavigate();
 
+    const [safari, setImInHell] = useState(false);
+    useEffect(() => {
+        if (navigator.userAgent.match(/AppleWebKit/) && !navigator.userAgent.match(/Chrome/)) {
+            setImInHell(true);
+        }
+    });
+
     if (!me) {
         redirect('/');
         return null;
@@ -30,7 +37,7 @@ export const FinishPage = () => {
         <Page>
             <StatusPlate type={me.is_player ? 'participant' : 'curator'} />
 
-            <div className={b('content')}>
+            <div className={b('content', { safari })}>
                 <Logo mix={b('logo')} />
 
                 {me.is_player ? <FinishBlockParticipant /> : <FinishBlockCurator />}

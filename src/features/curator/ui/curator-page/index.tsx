@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUnit } from 'effector-react';
 
-import { $userStore } from '../../../../entities/user';
+import { bem } from '../../../../shared/lib';
 import { $teamsStore, getTeams } from '../../../../entities/participant-team';
 import { $stantionsStore, getStantions } from '../../../../entities/stantion';
 
@@ -12,6 +12,8 @@ import { CuratorTeams } from '../curator-teams';
 
 import './index.scss';
 
+const b = bem('curator-page');
+
 // znv-asb-Jvb-ZBK
 export const CuratorPage = () => {
     const { loading: tLoading } = useUnit($teamsStore);
@@ -20,7 +22,7 @@ export const CuratorPage = () => {
     const t2Loading = useUnit(getTeams.pending);
     const s2Loading = useUnit(getStantions.pending);
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (!t2Loading) {
             getTeams();
         }
@@ -30,6 +32,13 @@ export const CuratorPage = () => {
         }
     }, []);
 
+    const [safari, setImInHell] = useState(false);
+    useEffect(() => {
+        if (navigator.userAgent.match(/AppleWebKit/) && !navigator.userAgent.match(/Chrome/)) {
+            setImInHell(true);
+        }
+    });
+
     if (tLoading || sLoading) {
         return <Page>Загрузка...</Page>;
     }
@@ -38,7 +47,7 @@ export const CuratorPage = () => {
         <Page>
             <StatusPlate type="curator" />
 
-            <CuratorTeams mix="curator-page__teams" />
+            <CuratorTeams mix={b('teams', { safari })} />
         </Page>
     );
 };

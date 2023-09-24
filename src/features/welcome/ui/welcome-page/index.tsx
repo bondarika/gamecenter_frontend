@@ -53,9 +53,16 @@ export const WelcomePage = () => {
         setTimeout(() => setBtnDisabled(!getIsScrolledToBottom(scrollBlockRef?.current)), 50);
     }, []);
 
+    const [safari, setImInHell] = useState(false);
+    useEffect(() => {
+        if (navigator.userAgent.match(/AppleWebKit/) && ! navigator.userAgent.match(/Chrome/)) {
+            setImInHell(true);
+         }
+    })
+
     return (
         <Page>
-            <div className={b()}>
+            <div className={b(null, { safari })}>
                 <h2 className={b('title')}>добро пожаловать!</h2>
                 <span className={b('subtitle')}>
                     Прежде чем начать, прочти небольшую справку о&nbsp;предстоящем квесте. Мы понимаем, что читать
