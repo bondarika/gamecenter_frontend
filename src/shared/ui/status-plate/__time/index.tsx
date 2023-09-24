@@ -28,7 +28,7 @@ export const StatusPlateTime = () => {
 
                 clearInterval(interval);
 
-                // return redirect('/finisher');
+                return redirect('/finisher');
             }
 
             setTime(parseTime(timeDiff)); // берем минус, тк идет обратный отсчет
