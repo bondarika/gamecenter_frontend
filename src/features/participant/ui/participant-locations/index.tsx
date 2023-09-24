@@ -38,7 +38,7 @@ export const ParticipantLocations = ({ mix }: Props) => {
                 if (!stantion) {
                     return;
                 }
-                const { id, name, description, image, assignment } = stantion;
+                const { id, name, description, assignment, image } = stantion;
 
                 index += 1;
 
@@ -64,8 +64,12 @@ export const ParticipantLocations = ({ mix }: Props) => {
                     );
                 }
 
-                // const imgSrc = `http://играцентр.рф/images/адмиралтейство.jpg`;
-                const imgSrc = `http://играцентр.рф/${image}`;
+                let parsed = '';
+                const img = image.split('/');
+                for (let i = 3; i < img.length; i++) {
+                    parsed += '/' + img[i];
+                }
+                const imgSrc = `http://играцентр.рф${parsed}`;
 
                 return (
                     <PopupPlate
