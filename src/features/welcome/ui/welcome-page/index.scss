@@ -7,7 +7,7 @@
     box-sizing: border-box;
     overflow: hidden;
 
-    background-color: #eee;
+    background-color: var(--surface-color-light);
     border-radius: 24px;
 
     &_safari {
@@ -32,12 +32,12 @@
     &__subtitle {
         display: block;
 
-        color: #666;
+        color: var(--font-color-secondary);
         font-family: SFProDisplay, sans-serif;
         font-size: 14px;
         font-weight: 500;
-        line-height: 125%;
-        letter-spacing: 0.28px;
+        line-height: 17.5px;
+        letter-spacing: 1%;
 
         margin-bottom: 16px;
     }

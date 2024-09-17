@@ -54,12 +54,13 @@ export const useMapTeamIdToStatus = (stantionId?: number) => {
 
 // для плашки статуса shared/status-plate/__teams
 // что по сути пиздец нарушает структуру и идею feature slice design, но как временное решение
+// upd 2024: ну, тут оказалось на проекте вообще плохо с этим нашим FSD))
 export const useAcceptedTeamsCount = (stantionId?: number) => {
     const { allTeams } = useUnit($teamsStore);
 
     const mapStantionsOrderByTeamId = useMapTeamIdToStantionsOrder();
 
-    if (!stantionId || !allTeams) {
+    if (typeof stantionId !== 'number' || !allTeams) {
         return { count: 0, teamsCount: 0 };
     }
 

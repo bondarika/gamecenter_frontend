@@ -16,7 +16,7 @@
         }
 
         padding: 24px;
-        background-color: #eeeeee;
+        background-color: var(--surface-color-light);
         border-radius: 24px;
 
         &_safari {
@@ -31,6 +31,8 @@
     &__logo {
         width: 140px;
         height: 140px;
+        min-width: 140px;
+        min-height: 140px;
 
         margin-bottom: 20px;
     }
@@ -48,17 +50,17 @@
         font-size: 20px;
         line-height: 28px;
 
-        color: #666666;
+        color: var(--font-color-secondary);
 
         margin-bottom: 16px;
     }
 
     &__title {
-        font-weight: 700;
+        font-weight: 600;
         font-size: 28px;
         line-height: 36px;
         font-family: SFMono, sans-serif;
-        color: #111111;
+        color: var(--font-color-primary);
     }
 
     &__plates {
@@ -76,7 +78,7 @@
 
         text-align: center;
         padding: 12px;
-        background-color: #dddddd;
+        background-color: var(--surface-color-gray);
         border-radius: 12px;
 
         span {
@@ -89,8 +91,8 @@
         .status-plate__block {
             margin: 0 !important;
 
-            &:not(&_orange) {
-                background-color: #eeeeee;
+            &:not(&_secondary) {
+                background-color: var(--surface-color-light);
             }
         }
     }

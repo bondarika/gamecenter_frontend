@@ -9,7 +9,7 @@
     box-sizing: border-box;
     padding: 24px;
 
-    background: #dddddd url('./pattern.png');
+    background: var(--surface-color-gray) url('./pattern.png');
     background-size: contain;
     background-attachment: fixed;
 

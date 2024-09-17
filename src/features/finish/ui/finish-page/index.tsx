@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 
 import { $userStore } from '../../../../entities/user';
 
-import { bem } from '../../../../shared/lib';
+import { bem, useSafari } from '../../../../shared/lib';
 import { Page } from '../../../../shared/ui/page';
 import { StatusPlate } from '../../../../shared/ui/status-plate';
 import { Logo } from '../../../../shared/ui/logo';
@@ -21,12 +21,7 @@ export const FinishPage = () => {
 
     const redirect = useNavigate();
 
-    const [safari, setImInHell] = useState(false);
-    useEffect(() => {
-        if (navigator.userAgent.match(/AppleWebKit/) && !navigator.userAgent.match(/Chrome/)) {
-            setImInHell(true);
-        }
-    });
+    const safari = useSafari();
 
     if (!me) {
         redirect('/');

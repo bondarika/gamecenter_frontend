@@ -30,7 +30,7 @@ export const SupportPlate = ({ mix }: Props) => {
 
             <div className={b('controls')}>
                 <a href="https://vk.com/platonovdi" target="_blank">
-                    <Button color="blue" size="s">
+                    <Button view="primary" size="s">
                         <img src={sosIcon} alt="sos" className={b('sos')} />
                     </Button>
                 </a>

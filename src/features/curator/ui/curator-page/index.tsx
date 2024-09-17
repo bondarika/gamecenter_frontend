@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useUnit } from 'effector-react';
 
-import { bem } from '../../../../shared/lib';
+import { bem, useSafari } from '../../../../shared/lib';
 import { $teamsStore, getTeams } from '../../../../entities/participant-team';
 import { $stantionsStore, getStantions } from '../../../../entities/stantion';
 
@@ -14,8 +14,8 @@ import './index.scss';
 
 const b = bem('curator-page');
 
-// znv-asb-Jvb-ZBK
 export const CuratorPage = () => {
+    // TODO Без 2 лоадингов точно не работало, а что – забылось во времени
     const { loading: tLoading } = useUnit($teamsStore);
     const { loading: sLoading } = useUnit($stantionsStore);
 
@@ -32,12 +32,7 @@ export const CuratorPage = () => {
         }
     }, []);
 
-    const [safari, setImInHell] = useState(false);
-    useEffect(() => {
-        if (navigator.userAgent.match(/AppleWebKit/) && !navigator.userAgent.match(/Chrome/)) {
-            setImInHell(true);
-        }
-    });
+    const safari = useSafari();
 
     if (tLoading || sLoading) {
         return <Page>Загрузка...</Page>;

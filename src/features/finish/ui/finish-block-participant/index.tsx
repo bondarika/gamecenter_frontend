@@ -19,20 +19,7 @@ export const FinishBlockParticipant = () => {
     const endTime = new Date(team?.start_time || 0).getTime() / 1000 + hours * 3600;
     const isTimeEnded = endTime - new Date().getTime() / 1000 <= 0;
 
-    const title = isFullyFinished ? 'Квест завершён!' : 'Время вышло!';
-    const subtitle = isFullyFinished ? 'Поздравляем!' : 'Благодарим за прохождение квеста!';
-
-    const finishPlate = isFullyFinished
-        ? 'Сейчас Вы можете быть свободны, отправляйтесь отдыхать! Все результаты будут в официальной группе Организационного комитета в ВК, а награждение пройдёт в ближайшие дни на Большевиков, 22. Следите за обновлениями!'
-        : 'Сейчас Вы можете быть свободны, отправляйтесь отдыхать! Все результаты будут в официальной группе Организационного комитета в ВК. Следите за обновлениями!';
-
-    const pointsPlate = isFullyFinished
-        ? 'Ваша команда успешно справилась с квестом и прошла все станции, заработав:'
-        : 'К сожалению, Ваша команда не успела пройти все станции, но заработала:';
-
-    const timePlate = !isTimeEnded
-        ? 'Вы справились быстрее предполагаемого времени, в запасе у Вас осталось:'
-        : 'Многие люди на планете не прошли ни одной станции, а вы справились с:';
+    const { title, subtitle, pointsPlate, timePlate, whatsNext } = getText(isFullyFinished, isTimeEnded);
 
     return (
         <>
@@ -51,7 +38,24 @@ export const FinishBlockParticipant = () => {
                 </div>
             </div>
 
-            <BriefArticle title="Что дальше?" markdown={finishPlate} color="gray" />
+            {!isFullyFinished && <BriefArticle title="Что дальше?" markdown={whatsNext} color="gray" />}
         </>
     );
+};
+
+const getText = (isFullyFinished: boolean, isTimeEnded: boolean) => {
+    const title = isFullyFinished ? 'квест завершён!' : 'ваше время вышло!';
+    const subtitle = isFullyFinished ? 'поздравляем!' : 'спасибо, что были с нами!';
+
+    const pointsPlate = isFullyFinished
+        ? 'Ваша команда прошла все станции и заработала:'
+        : 'К сожалению, ваша команда не успела завершить квест, но заработала:';
+
+    const timePlate = !isTimeEnded
+        ? 'А некоторые ребята ещё проходят квест и у них есть ещё:'
+        : 'Многие люди на планете не прошли ни одной станции, а вы справились с:';
+
+    const whatsNext = 'Отправляйтесь на Мойку, 61, там будет официальное закрытие квеста';
+
+    return { title, subtitle, pointsPlate, timePlate, whatsNext };
 };

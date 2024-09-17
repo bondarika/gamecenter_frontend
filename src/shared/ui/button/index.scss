@@ -12,16 +12,54 @@
 
     transition: 0.2s;
 
-    &_color_blue {
-        background: #6bbaff;
+    &_view_primary {
+        background: var(--control-color-primary);
+        color: var(--control-color-primary-text);
 
-        color: #265178;
+        svg {
+            fill: var(--control-color-primary-text);
+        }
+
+        &:active {
+            background: var(--control-color-primary-pressed);
+        }
     }
 
-    &_color_orange {
-        background: #F28B53;
+    &_view_secondary {
+        background: var(--control-color-secondary);
+        color: var(--control-color-secondary-text);
 
-        color: #853D16;
+        svg {
+            fill: var(--control-color-secondary-text);
+        }
+
+        &:active {
+            background: var(--control-color-secondary-pressed);
+        }
+    }
+
+    &_view_error {
+        background: var(--control-color-error);
+        color: var(--control-color-error-text);
+
+        svg {
+            fill: var(--control-color-error-text);
+        }
+
+        &:active {
+            background: var(--control-color-error-pressed);
+        }
+    }
+
+    &:disabled {
+        background: var(--control-color-disabled);
+        color: var(--control-color-disabled-text);
+
+        cursor: default;
+
+        svg {
+            fill: var(--control-color-disabled-text);
+        }
     }
 
     &_size_m {
@@ -38,20 +76,5 @@
         min-width: 36px;
 
         border-radius: 8px;
-    }
-
-    &:disabled {
-        background: #bbbbbb;
-        color: #888888;
-
-        cursor: default;
-
-        svg {
-            fill: #888888;
-        }
-    }
-
-    &:active {
-        transform: scale(0.97);
     }
 }

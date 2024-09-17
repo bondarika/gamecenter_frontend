@@ -3,11 +3,11 @@
     border-radius: 12px;
 
     &_color_gray {
-        background-color: #ddd;
+        background-color: var(--surface-color-gray);
     }
 
     &_color_white {
-        background-color: #eee;
+        background-color: var(--surface-color-light);
     }
 
     &__controls {
@@ -22,7 +22,7 @@
         line-height: 18px;
         font-weight: 500;
 
-        color: #888888;
+        color: var(--font-color-dark-gray);
     }
 
     &__expand-button {
@@ -61,7 +61,7 @@
             }
 
             &__title {
-                color: #111;
+                color: var(--font-color-primary);
             }
 
             &__expand-button {
@@ -71,13 +71,13 @@
             &__status-badge::before {
                 content: attr(data-numberic);
 
-                background-color: #6bbaff;
+                background-color: var(--control-color-primary);
 
                 font-family: SFProRounded, sans-serif;
                 font-weight: 700;
                 font-size: 16px;
 
-                color: #dddddd;
+                color: var(--surface-color-gray);
             }
         }
     }
@@ -86,7 +86,7 @@
         .popup-plate__status-badge::before {
             content: url('./finish-stantion.svg');
 
-            background-color: #6bbaff;
+            background-color: var(--control-color-primary);
         }
     }
 
@@ -94,7 +94,7 @@
         .popup-plate__status-badge::before {
             content: url('./finished.svg');
 
-            background-color: #92cf4a;
+            background-color: var(--control-color-secondary);
         }
     }
 
@@ -102,7 +102,7 @@
         .popup-plate__status-badge::before {
             content: url('./locked.svg');
 
-            background-color: #888888;
+            background-color: var(--control-color-disabled-dark);
         }
     }
 }

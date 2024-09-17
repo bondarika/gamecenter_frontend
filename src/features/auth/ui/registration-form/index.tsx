@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useUnit } from 'effector-react';
 
 import { Button } from '../../../../shared/ui/button';
@@ -9,23 +9,37 @@ import { $authStore, postCheckAuth } from '../../model/store';
 
 import './index.scss';
 
+/** Форма регистрации при входе на платформу */
 export const RegistrationForm = () => {
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [wasEdited, setWasEdited] = React.useState(false);
 
-    const { error } = useUnit($authStore);
     const postCheckAuthPending = useUnit(postCheckAuth.pending);
     const getMePending = useUnit(getMe.pending);
     const pending = postCheckAuthPending || getMePending;
 
-    const handleSubmit = () => postCheckAuth({ username, password });
+    const { error } = useUnit($authStore);
+
+    useEffect(() => {
+        setWasEdited(true);
+    }, [username, password]);
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        setWasEdited(false);
+        postCheckAuth({ username, password });
+    };
+
+    const shouldDisableSubmit = pending || !username || !password || (error && !wasEdited);
 
     // Есть прикол, что автозаполненные браузером поля не триггерят onChange
     // и кнопка submit остается disabled, пока пользователь не кликнет по полю
     return (
-        <div className={'registration-form'}>
+        <form className={'registration-form'} onSubmit={handleSubmit}>
             <Logo mix="registration-form__logo" />
-            <span className="registration-form__subtitle">играцентр — 2023</span>
+            <span className="registration-form__subtitle">играцентр — 2024</span>
             <span className="registration-form__title">авторизация</span>
 
             <div className="registration-form__controls">
@@ -47,13 +61,13 @@ export const RegistrationForm = () => {
                     type="password"
                 />
 
-                <Button onClick={handleSubmit} disabled={pending || !username || !password}>
+                <Button type="submit" disabled={shouldDisableSubmit}>
                     ГОТОВО
                 </Button>
             </div>
 
             {/* сократил текст из макета, иначе получается очень мелко */}
-            {error && <div className="registration-form__error">неверный логин или пароль</div>}
-        </div>
+            {error && !wasEdited && <div className="registration-form__error">неверный логин или пароль</div>}
+        </form>
     );
 };

@@ -2,21 +2,21 @@
     padding: 16px;
 
     &_color_white {
-        background-color: #eee;
+        background-color: var(--surface-color-light);
         border-radius: 8px;
     }
 
     &_color_gray {
-        background-color: #ddd;
+        background-color: var(--surface-color-gray);
         border-radius: 12px;
 
         .brief-article__image {
-            background-color: #eee;
+            background-color: var(--surface-color-light);
         }
     }
 
     &__title {
-        color: #4a98dd;
+        color: var(--font-color-blue);
         font-family: SFProDisplay, sans-serif;
         font-size: 18px;
         font-weight: 600;
@@ -26,7 +26,7 @@
     }
 
     &__content {
-        color: #111;
+        color: var(--font-color-primary);
         font-family: SFProDisplay, sans-serif;
         font-size: 16px;
         font-weight: 500;
@@ -50,6 +50,6 @@
 
         border-radius: 8px;
 
-        background-color: #DDDDDD;
+        background-color: var(--surface-color-dark-gray);
     }
 }

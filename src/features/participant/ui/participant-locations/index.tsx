@@ -3,7 +3,7 @@ import { useUnit } from 'effector-react';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
-import { $teamsStore } from '../../../../entities/participant-team';
+import { $teamsStore, ParticipantTeam } from '../../../../entities/participant-team';
 
 import { plural, bem } from '../../../../shared/lib';
 import { BriefArticle } from '../../../../shared/ui/brief-article';
@@ -81,7 +81,12 @@ export const ParticipantLocations = ({ mix }: Props) => {
                         defaultExpanded={true}
                         color="gray"
                     >
-                        <BriefArticle title="Историческая справка" color="white" markdown={description} image={imgSrc} />
+                        <BriefArticle
+                            title="Историческая справка"
+                            color="white"
+                            markdown={description}
+                            image={imgSrc}
+                        />
                         <BriefArticle
                             title="Задание"
                             markdown={assignment}

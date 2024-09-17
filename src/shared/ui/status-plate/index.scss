@@ -2,13 +2,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+
     flex-wrap: wrap;
 
     padding: 16px 16px 8px 24px;
     border-radius: 24px;
 
-    background: #eeeeee;
+    background: var(--surface-color-light);
 
     @media screen and (max-width: 420px) {
         justify-content: center;
@@ -30,12 +30,16 @@
         padding: 0 8px;
         border-radius: 8px;
 
-        background-color: #dddddd;
-        color: #888888;
+        background-color: var(--surface-color-gray);
+        color: var(--font-color-dark-gray);
 
-        &_orange {
-            background: #F28B53;
-            color: #853D16;
+        &_secondary {
+            background: var(--control-color-secondary);
+            color: var(--control-color-secondary-text);
+        }
+
+        &_time {
+            min-width: 100px;
         }
 
         svg {
@@ -56,11 +60,14 @@
         flex-wrap: wrap;
     }
 
-    &__stantion-name  {
+    &__stantion-name {
+        padding: 16px 24px;
+        border-radius: 24px;
+        margin-top: 8px;
+        background: var(--surface-color-light);
+
         font-family: SFMono, sans-serif;
         font-size: 18px;
         font-weight: 500;
-        margin-bottom: 9px;
-        margin-right: 8px;
     }
 }

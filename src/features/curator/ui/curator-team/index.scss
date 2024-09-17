@@ -23,23 +23,24 @@
     &__timer {
         font-weight: 600;
         font-size: 18px;
-        color: #537729;
+        color: var(--control-color-secondary-text);
 
         width: 160px;
 
         margin-right: 8px;
-        background-color: #92cf4a;
+        background-color: var(--control-color-secondary);
 
         &_too-much {
-            background-color: #fa7392;
+            color: var(--control-color-error-text);
+            background-color: var(--control-color-error);
         }
     }
 
     &__stantion-time {
         font-weight: 600;
         font-size: 18px;
-        color: #888888;
-        background-color: #ddd;
+        color: var(--font-color-dark-gray);
+        background-color: var(--surface-color-gray);
         padding: 0 8px;
 
         svg {
@@ -83,7 +84,7 @@
     &__warn {
         font-size: 14px;
         font-weight: 500;
-        color: #666;
+        color: var(--font-color-secondary);
         display: block;
         margin-top: 12px;
     }
@@ -93,7 +94,7 @@
     display: flex;
     border-radius: 8px;
     padding: 8px;
-    background-color: #DDDDDD;
+    background-color: var(--surface-color-gray);
 
     margin-top: 8px;
 
@@ -109,9 +110,9 @@
         font-family: SFProRounded, sans-serif;
         font-size: 18px;
         font-weight: 700;
-        color: #666666;
+        color: var(--font-color-secondary);
 
-        background-color: #BBBBBB;
+        background-color: var(--surface-color-darker-gray);
         border-radius: 8px;
     }
 
@@ -125,7 +126,7 @@
     }
 
     &__subtitle {
-        color: #666666;
+        color: var(--font-color-secondary);
     }
 
     &__controls {

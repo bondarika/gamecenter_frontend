@@ -47,10 +47,10 @@ export const PopupPlate = ({ title, status, numberic, defaultExpanded, children,
                     viewBox="0 0 24 24"
                     fill="none"
                 >
-                    <path d="M12 8L6 14L12 8Z" fill="#111111" />
+                    <path d="M12 8L6 14L12 8Z" fill="var(--font-color-primary)" />
                     <path
                         d="M18 14L12 8L6 14"
-                        stroke="#AAAAAA"
+                        stroke="var(--font-color-placeholder)"
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"

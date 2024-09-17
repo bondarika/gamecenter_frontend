@@ -11,6 +11,7 @@ import { StatusPlateTeams } from './__teams';
 import { StatusPlateStantionName } from './__stantion-name';
 
 import './index.scss';
+import { BriefArticle } from '../brief-article';
 
 interface Props {
     type: 'participant' | 'curator';
@@ -22,30 +23,32 @@ export const StatusPlate = ({ type }: Props) => {
     const isSmallMobile = useMedia('(max-width: 420px)');
 
     return (
-        <div className={b()}>
-            {isSmallMobile ? (
-                <div className={b('flex-center')}>
+        <>
+            <div className={b()}>
+                {isSmallMobile ? (
+                    <div className={b('flex-center')}>
+                        <Logo mix={b('logo')} />
+                        <StatusPlateTime />
+                    </div>
+                ) : (
                     <Logo mix={b('logo')} />
-                    {type === 'participant' && <StatusPlateTime />}
-                </div>
-            ) : (
-                <Logo mix={b('logo')} />
-            )}
-
-            {type === 'curator' && <StatusPlateStantionName />}
-
-            <div className={b('flex-center')}>
-                {!isSmallMobile && type === 'participant' && <StatusPlateTime />}
-
-                {type === 'participant' && (
-                    <>
-                        <StatusPlateLocations />
-                        <StatusPlatePoints />
-                    </>
                 )}
 
-                {type === 'curator' && <StatusPlateTeams />}
+                <div className={b('flex-center')}>
+                    {!isSmallMobile && <StatusPlateTime />}
+
+                    {type === 'participant' && (
+                        <>
+                            <StatusPlateLocations />
+                            <StatusPlatePoints />
+                        </>
+                    )}
+
+                    {type === 'curator' && <StatusPlateTeams />}
+                </div>
             </div>
-        </div>
+
+            {type === 'curator' && <StatusPlateStantionName />}
+        </>
     );
 };

@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { $userStore } from '../../../../entities/user';
-import { bem, getIsScrolledToBottom } from '../../../../shared/lib';
+import { bem, getIsScrolledToBottom, useSafari } from '../../../../shared/lib';
 import { Page } from '../../../../shared/ui/page';
 import { Button } from '../../../../shared/ui/button';
 import { BriefArticle } from '../../../../shared/ui/brief-article';
@@ -53,12 +53,7 @@ export const WelcomePage = () => {
         setTimeout(() => setBtnDisabled(!getIsScrolledToBottom(scrollBlockRef?.current)), 50);
     }, []);
 
-    const [safari, setImInHell] = useState(false);
-    useEffect(() => {
-        if (navigator.userAgent.match(/AppleWebKit/) && ! navigator.userAgent.match(/Chrome/)) {
-            setImInHell(true);
-         }
-    })
+    const safari = useSafari();
 
     return (
         <Page>

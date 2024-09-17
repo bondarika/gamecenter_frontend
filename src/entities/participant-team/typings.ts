@@ -6,6 +6,8 @@ export interface ParticipantTeam {
     start_time: string;
     score: number;
     user: number;
-    stations: StantionsOrder['id']; // id обьекта с порядком станций
+
+    /** id обьекта с порядком станций */
+    stations: StantionsOrder['id'];
     current_station: Stantion['id'];
 }

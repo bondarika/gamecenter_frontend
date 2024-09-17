@@ -15,11 +15,11 @@
 
     max-width: calc(100% - 48px);
 
-    background-color: #eee;
+    background-color: var(--surface-color-light);
     border-radius: 24px;
 
     font-family: SFProRounded, sans-serif;
-    color: #666666;
+    color: var(--font-color-secondary);
     font-size: 12px;
     line-height: 14.32px;
 

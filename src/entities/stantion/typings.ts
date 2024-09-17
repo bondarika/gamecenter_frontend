@@ -4,14 +4,17 @@ export interface Stantion {
     points: number;
     name: string;
     description: string;
-    image: string; // url в сервер со статикой
-    assignment: string; // основное задание
-    // task: Task['id']; // доп задание от куратора, после правок не используется
+
+    /** url в сервер со статикой */
+    image: string;
+
+    /** основное задание */
+    assignment: string;
 }
 
 export interface StantionsOrder {
     id: number;
-    order: Stantion['id'][]
+    order: Stantion['id'][];
 }
 
 export interface RawStantionsOrder {

@@ -84,17 +84,11 @@ export const CuratorTeam = ({ team, stantion }: Props) => {
                         <Button
                             onClick={handleStart}
                             disabled={isTimerStarted || answerAccepted}
-                            color="blue"
+                            view="primary"
                             mix={b('control')}
                             size="s"
                         >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 14 14"
-                                fill="#265178"
-                            >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 14 14">
                                 <path d="M1.97656 13.8281C1.34375 13.8281 0.898438 13.3438 0.898438 12.5703V1.42969C0.898438 0.65625 1.34375 0.171875 1.97656 0.171875C2.3125 0.171875 2.59375 0.289062 2.95312 0.5L12.1562 5.82812C12.8359 6.21875 13.1016 6.51562 13.1016 7C13.1016 7.48438 12.8359 7.78125 12.1562 8.17188L2.95312 13.5078C2.59375 13.7109 2.3125 13.8281 1.97656 13.8281Z" />
                                 <path d="M1.97656 13.8281C1.34375 13.8281 0.898438 13.3438 0.898438 12.5703V1.42969C0.898438 0.65625 1.34375 0.171875 1.97656 0.171875C2.3125 0.171875 2.59375 0.289062 2.95312 0.5L12.1562 5.82812C12.8359 6.21875 13.1016 6.51562 13.1016 7C13.1016 7.48438 12.8359 7.78125 12.1562 8.17188L2.95312 13.5078C2.59375 13.7109 2.3125 13.8281 1.97656 13.8281Z" />
                             </svg>
@@ -102,17 +96,11 @@ export const CuratorTeam = ({ team, stantion }: Props) => {
                         <Button
                             onClick={handleStop}
                             disabled={!isTimerStarted || answerAccepted}
-                            color="orange"
+                            view="secondary"
                             mix={b('control')}
                             size="s"
                         >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="15"
-                                height="16"
-                                viewBox="0 0 14 14"
-                                fill="#853D16"
-                            >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 14 14">
                                 <path d="M0.507812 11.6953V2.30469C0.507812 1.1875 1.21094 0.507812 2.36719 0.507812H11.6328C12.7891 0.507812 13.4922 1.1875 13.4922 2.30469V11.6953C13.4922 12.8125 12.7891 13.4922 11.6328 13.4922H2.36719C1.21094 13.4922 0.507812 12.8125 0.507812 11.6953Z" />
                                 <path d="M0.507812 11.6953V2.30469C0.507812 1.1875 1.21094 0.507812 2.36719 0.507812H11.6328C12.7891 0.507812 13.4922 1.1875 13.4922 2.30469V11.6953C13.4922 12.8125 12.7891 13.4922 11.6328 13.4922H2.36719C1.21094 13.4922 0.507812 12.8125 0.507812 11.6953Z" />
                             </svg>
@@ -128,7 +116,7 @@ export const CuratorTeam = ({ team, stantion }: Props) => {
                             >
                                 <path
                                     d="M11 7.26669V11L13.3333 13.3334M20.3333 11C20.3333 16.1547 16.1546 20.3334 11 20.3334C5.8453 20.3334 1.66663 16.1547 1.66663 11C1.66663 5.84536 5.8453 1.66669 11 1.66669C16.1546 1.66669 20.3333 5.84536 20.3333 11Z"
-                                    stroke="#888888"
+                                    stroke="var(--font-color-dark-gray)"
                                     strokeWidth="2.33333"
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -183,7 +171,9 @@ export const CuratorTeam = ({ team, stantion }: Props) => {
             </div>
 
             <span className={b('warn')}>
-                Проверьте количество баллов перед отправкой!<br />Результат нельзя будет изменить после отправки на сервер
+                Проверьте количество баллов перед отправкой!
+                <br />
+                Результат нельзя будет изменить после отправки на сервер
             </span>
         </>
     );
@@ -234,10 +224,10 @@ class FinePlate extends React.Component<FinePlateProps, { counter: number }> {
                     <div className={fb('subtitle')}>{`-${points} ${plural(['балл', 'балла', 'баллов'], points)}`}</div>
                 </div>
                 <div className={fb('controls')}>
-                    <Button color="orange" onClick={handlePlusClick} size="s">
+                    <Button view="secondary" onClick={handlePlusClick} size="s">
                         +
                     </Button>
-                    <Button color="blue" onClick={handleMinusClick} size="s" disabled={this.state.counter === 0}>
+                    <Button view="primary" onClick={handleMinusClick} size="s" disabled={this.state.counter === 0}>
                         -
                     </Button>
                 </div>

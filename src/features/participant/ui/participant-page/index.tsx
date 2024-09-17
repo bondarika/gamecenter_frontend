@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useUnit } from 'effector-react';
 
-import { bem } from '../../../../shared/lib';
+import { bem, useSafari } from '../../../../shared/lib';
 
 import { $stantionsStore, getStantions } from '../../../../entities/stantion';
 
@@ -15,20 +15,15 @@ import './index.scss';
 const b = bem('participant-page');
 
 export const ParticipantPage = () => {
-    const { loading: sLoading } = useUnit($stantionsStore);
+    const { loading: isLoading } = useUnit($stantionsStore);
 
     useEffect(() => {
         getStantions();
     }, []);
 
-    const [safari, setImInHell] = useState(false);
-    useEffect(() => {
-        if (navigator.userAgent.match(/AppleWebKit/) && !navigator.userAgent.match(/Chrome/)) {
-            setImInHell(true);
-        }
-    });
+    const safari = useSafari();
 
-    if (sLoading) {
+    if (isLoading) {
         return <Page>Загрузка...</Page>;
     }
 
