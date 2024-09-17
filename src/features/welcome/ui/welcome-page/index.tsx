@@ -74,7 +74,7 @@ export const WelcomePage = () => {
                 </div>
 
                 <Button onClick={handleAgreement} disabled={btnDisabled}>
-                    ГОТОВО
+                    готово
                 </Button>
             </div>
         </Page>

@@ -19,10 +19,9 @@
     }
 
     &__title {
-        font-family: SFMono, sans-serif;
         font-size: 32px;
         font-style: normal;
-        font-weight: 700;
+        font-weight: 600;
         line-height: 36px;
         text-align: center;
 
@@ -33,7 +32,6 @@
         display: block;
 
         color: var(--font-color-secondary);
-        font-family: SFProDisplay, sans-serif;
         font-size: 14px;
         font-weight: 500;
         line-height: 17.5px;

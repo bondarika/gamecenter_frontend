@@ -62,7 +62,7 @@ export const RegistrationForm = () => {
                 />
 
                 <Button type="submit" disabled={shouldDisableSubmit}>
-                    ГОТОВО
+                    готово
                 </Button>
             </div>
 
