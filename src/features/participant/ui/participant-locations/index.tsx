@@ -95,9 +95,9 @@ export const ParticipantLocations = ({ mix }: Props) => {
                             Footer={() => (
                                 <div style={{ display: 'flex', marginTop: 12 }}>
                                     <StatusPlateTimeRaw
-                                        time={`${stantion.points} ${plural(
+                                        time={`${stantion.time} ${plural(
                                             ['минута', 'минуты', 'минут'],
-                                            stantion.points,
+                                            stantion.time,
                                         )}`}
                                         mix={b('time-plate')}
                                     />
