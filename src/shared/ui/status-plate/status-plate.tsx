@@ -11,7 +11,6 @@ import { StatusPlateTeams } from './__teams';
 import { StatusPlateStantionName } from './__stantion-name';
 
 import './index.scss';
-import { BriefArticle } from '../brief-article';
 
 interface Props {
     type: 'participant' | 'curator';
@@ -28,23 +27,22 @@ export const StatusPlate = ({ type }: Props) => {
                 {isSmallMobile ? (
                     <div className={b('flex-center')}>
                         <Logo mix={b('logo')} />
-                        <StatusPlateTime />
+                        {type === 'participant' && <StatusPlateTime />}
                     </div>
                 ) : (
                     <Logo mix={b('logo')} />
                 )}
 
                 <div className={b('flex-center')}>
-                    {!isSmallMobile && <StatusPlateTime />}
-
-                    {type === 'participant' && (
+                    {type === 'participant' ? (
                         <>
+                            {!isSmallMobile && <StatusPlateTime />}
                             <StatusPlateLocations />
                             <StatusPlatePoints />
                         </>
+                    ) : (
+                        <StatusPlateTeams />
                     )}
-
-                    {type === 'curator' && <StatusPlateTeams />}
                 </div>
             </div>
 
