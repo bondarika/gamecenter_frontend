@@ -1,0 +1,53 @@
+.welcome-page {
+    display: flex;
+    flex-direction: column;
+
+    max-height: calc(100vh - 120px);
+    padding: 24px;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    background-color: var(--surface-color-light);
+    border-radius: 24px;
+
+    &_safari {
+        max-height: calc(100vh - 200px);
+    }
+
+    .button {
+        flex-shrink: 0;
+    }
+
+    &__title {
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 36px;
+        text-align: center;
+
+        margin-bottom: 16px;
+    }
+
+    &__subtitle {
+        display: block;
+
+        color: var(--font-color-secondary);
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 17.5px;
+        letter-spacing: 1%;
+
+        margin-bottom: 16px;
+    }
+
+    &__scroll-block {
+        flex-shrink: 1;
+
+        border-radius: 12px;
+
+        max-height: 430px;
+        overflow: scroll;
+
+        margin-bottom: 16px;
+    }
+}

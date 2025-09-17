@@ -1,0 +1,139 @@
+.curator-team {
+    &__controls {
+        display: flex;
+    }
+
+    &__control {
+        width: 36px;
+        margin-right: 8px;
+    }
+
+    &__timer,
+    &__stantion-time {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        height: 36px;
+        flex-grow: 1;
+
+        border-radius: 8px;
+    }
+
+    &__timer {
+        font-weight: 600;
+        font-size: 18px;
+        color: var(--control-color-secondary-text);
+
+        width: 160px;
+
+        margin-right: 8px;
+        background-color: var(--control-color-secondary);
+
+        &_too-much {
+            color: var(--control-color-error-text);
+            background-color: var(--control-color-error);
+        }
+    }
+
+    &__stantion-time {
+        font-weight: 600;
+        font-size: 18px;
+        color: var(--font-color-dark-gray);
+        background-color: var(--surface-color-gray);
+        padding: 0 8px;
+
+        svg {
+            margin-right: 8px;
+        }
+
+        span#mobile-none {
+            margin-left: 4px;
+        }
+
+        @media screen and (max-width: 380px) {
+            font-size: 16px;
+
+            svg {
+                width: 18px;
+                height: 18px;
+
+                margin-right: 4px;
+            }
+
+            span#mobile-none {
+                display: none;
+            }
+        }
+    }
+
+    &__riddle-btn {
+        width: fit-content;
+
+        padding: 12px 16px;
+    }
+
+    &__send-btn {
+        margin-right: 8px;
+    }
+
+    &__art {
+        margin-bottom: 8px;
+    }
+
+    &__warn {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--font-color-secondary);
+        display: block;
+        margin-top: 12px;
+    }
+}
+
+.fine-plate {
+    display: flex;
+    border-radius: 8px;
+    padding: 8px;
+    background-color: var(--surface-color-gray);
+
+    margin-top: 8px;
+
+    &__counter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 36px;
+        height: 36px;
+        margin-right: 12px;
+
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--font-color-secondary);
+
+        background-color: var(--surface-color-darker-gray);
+        border-radius: 8px;
+    }
+
+    &__text-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title {
+        font-weight: 500;
+    }
+
+    &__subtitle {
+        color: var(--font-color-secondary);
+    }
+
+    &__controls {
+        display: flex;
+        margin-left: auto;
+
+        .button:first-child {
+            margin-right: 4px;
+        }
+    }
+}

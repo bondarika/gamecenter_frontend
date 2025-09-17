@@ -1,0 +1,19 @@
+.participant-page__locations {
+    margin-top: 12px;
+
+    max-height: calc(100vh - 200px); // отступы плашки и прочее
+    overflow: scroll;
+    box-sizing: border-box;
+
+    @media screen and (max-width: 400px) {
+        max-height: calc(100vh - 248px);
+    }
+
+    &_safari {
+        max-height: calc(100vh - 260px);
+
+        @media screen and (max-width: 400px) {
+            max-height: calc(100vh - 324px);
+        }
+    }
+}

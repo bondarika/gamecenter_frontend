@@ -1,0 +1,80 @@
+.button {
+    width: 100%;
+    outline: none;
+    border: none;
+
+    cursor: pointer;
+
+    font-family: var(--font-family-primary);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 16px;
+
+    transition: 0.2s;
+
+    &_view_primary {
+        background: var(--control-color-primary);
+        color: var(--control-color-primary-text);
+
+        svg {
+            fill: var(--control-color-primary-text);
+        }
+
+        &:active {
+            background: var(--control-color-primary-pressed);
+        }
+    }
+
+    &_view_secondary {
+        background: var(--control-color-secondary);
+        color: var(--control-color-secondary-text);
+
+        svg {
+            fill: var(--control-color-secondary-text);
+        }
+
+        &:active {
+            background: var(--control-color-secondary-pressed);
+        }
+    }
+
+    &_view_error {
+        background: var(--control-color-error);
+        color: var(--control-color-error-text);
+
+        svg {
+            fill: var(--control-color-error-text);
+        }
+
+        &:active {
+            background: var(--control-color-error-pressed);
+        }
+    }
+
+    &:disabled {
+        background: var(--control-color-disabled);
+        color: var(--control-color-disabled-text);
+
+        cursor: default;
+
+        svg {
+            fill: var(--control-color-disabled-text);
+        }
+    }
+
+    &_size_m {
+        height: 48px;
+        min-width: 48px;
+
+        border-radius: 16px;
+    }
+
+    &_size_s {
+        font-size: 18px;
+        line-height: 0;
+        height: 36px;
+        min-width: 36px;
+
+        border-radius: 8px;
+    }
+}

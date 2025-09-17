@@ -1,0 +1,33 @@
+.page {
+    display: flex;
+    justify-content: center;
+
+    min-width: 100%;
+    height: 100vh;
+    overflow: hidden;
+
+    box-sizing: border-box;
+    padding: 24px;
+
+    background: var(--surface-color-gray) url('./pattern.png');
+    background-size: contain;
+    background-attachment: fixed;
+
+    &__content {
+        width: 600px;
+    }
+
+    @media screen and (max-width: 600px) {
+        &__content {
+            max-width: 100%;
+        }
+
+        padding: 24px 12px;
+
+        .registration-form__input,
+        .registration-form__input:-webkit-autofill,
+        .registration-form__submit {
+            font-size: unset;
+        }
+    }
+}

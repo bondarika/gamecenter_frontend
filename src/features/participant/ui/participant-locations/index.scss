@@ -1,0 +1,23 @@
+.participant-locations {
+    padding: 12px;
+
+    background-color: var(--surface-color-light);
+
+    border-radius: 24px;
+
+    &__content-wrapper {
+        margin-bottom: 12px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__question {
+        margin-top: 8px;
+    }
+
+    &__time-plate {
+        margin-right: 8px;
+    }
+}

@@ -1,0 +1,49 @@
+@font-face {
+  font-family: "ArticularCF";
+  src: url("shared/lib/fonts/ArticulatCF-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ArticularCF";
+  src: url("shared/lib/fonts/ArticulatCF-DemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  /* Цвета интерактивных и (цепляющих) элементов */
+  --control-color-primary: #2095e8;
+  --control-color-secondary: #56c456;
+  --control-color-error: #fa7392;
+  --control-color-disabled: #bbb;
+  --control-color-disabled-dark: #888;
+
+  --control-color-primary-pressed: #0076ca;
+  --control-color-secondary-pressed: #4e9c4e;
+  --control-color-error-pressed: #fa7392;
+
+  --control-color-primary-text: #004a7f;
+  --control-color-secondary-text: #277127;
+  --control-color-error-text: #843749;
+  --control-color-disabled-text: #888;
+
+  /* Цвета поверхностей */
+  --surface-color-light: #eee;
+  --surface-color-gray: #ddd;
+  --surface-color-dark-gray: #ccc;
+  --surface-color-darker-gray: #bbb;
+
+  /* Цвета текста */
+  --font-color-primary: #111;
+  --font-color-secondary: #666;
+  --font-color-placeholder: #aaa;
+  --font-color-blue: #0076ca;
+  --font-color-dark-gray: #888;
+
+  /* Шрифт */
+  --font-family-primary: ArticularCF, sans-serif
+}
