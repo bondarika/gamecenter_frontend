@@ -1,7 +1,7 @@
 import { createStore, createEffect, createEvent } from 'effector';
 
 import { getMe } from '../../../entities/user';
-import { post, setAuthToken } from '../../../shared/lib';
+import { post, postWithQuery, setAuthToken } from '../../../shared/lib';
 
 export const $authStore = createStore<{
   error: boolean;
@@ -36,7 +36,7 @@ export const postCheckAuth = createEffect(
 // немного тупая логика – нужно в месте вызова эффекта словить catch, чтобы редиректнуть на авторизацию
 export const postVerifyToken = createEffect(
   async (payload: { token: string }) => {
-    await post('/token/verify/', payload);
+    await postWithQuery('/token/verify/', { token: payload.token });
   }
 );
 

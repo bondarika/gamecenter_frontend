@@ -44,3 +44,24 @@ export const post = async (path: string, body: string | object) => {
 
   return response.json();
 };
+
+export const postWithQuery = async (
+  path: string,
+  queryParams: Record<string, string>
+) => {
+  const url = new URL(API_URL + path);
+  Object.entries(queryParams).forEach(([key, value]) => {
+    url.searchParams.append(key, value);
+  });
+
+  const response = await fetch(url.toString(), {
+    method: 'POST',
+    headers: defaultHeaders,
+  });
+
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+
+  return response.json();
+};
