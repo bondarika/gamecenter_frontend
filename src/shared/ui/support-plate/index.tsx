@@ -3,7 +3,7 @@ import React from 'react';
 import { bem } from '../../lib';
 import { Button } from '../button';
 
-import sosIcon from './sos.png';
+import sosIcon from './sos.svg';
 import orgcomIcon from './orgcom.png';
 import techdepIcon from './techdep.png';
 
