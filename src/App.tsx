@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 
 import { CuratorPage } from './features/curator';
 import { ParticipantPage } from './features/participant';
-import { RegistrationPage, postVerifyToken } from './features/auth';
+import { RegistrationPage, verifyToken } from './features/auth';
 import { WelcomePage } from './features/welcome';
 import { FinishPage } from './features/finish';
 
@@ -46,7 +46,7 @@ const Redirects = ({ children }: React.PropsWithChildren) => {
             return;
         }
 
-        postVerifyToken({ token: accessToken })
+        verifyToken()
             .then(async () => {
                 setAuthToken(accessToken);
 
