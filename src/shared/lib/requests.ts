@@ -1,17 +1,41 @@
 const API_URL =
   (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000/api';
 
+// POST-запрос без body и Content-Type (только Authorization)
+export const postNoBody = async (
+  path: string,
+  options?: { useRefreshToken?: boolean }
+) => {
+  const token = options?.useRefreshToken
+    ? localStorage.getItem('refresh_token')
+    : localStorage.getItem('access_token');
+
+  const headers: Record<string, string> = {};
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
+  const response = await fetch(API_URL + path, {
+    method: 'POST',
+    headers,
+  });
+
+  return handleResponse(response, { method: 'POST' });
+};
+
 const defaultHeaders = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
 };
 
-export const setAuthToken = (accessToken: string, refreshToken: string) => {
+export const setAuthToken = (accessToken: string, refreshToken?: string) => {
+  console.log('[setAuthToken] access:', accessToken, 'refresh:', refreshToken);
   localStorage.setItem('access_token', accessToken);
-  localStorage.setItem('refresh_token', refreshToken);
+  if (refreshToken) {
+    localStorage.setItem('refresh_token', refreshToken);
+  }
 };
 
 export const removeAuthToken = () => {
+  console.log('[removeAuthToken] removing tokens');
   localStorage.removeItem('access_token');
   localStorage.removeItem('refresh_token');
 };
@@ -37,30 +61,19 @@ async function handleResponse(
     const refreshToken = localStorage.getItem('refresh_token');
     if (refreshToken) {
       try {
-        const refreshResponse = await fetch(API_URL + '/token/refresh/', {
-          method: 'POST',
-          headers: {
-            ...defaultHeaders,
-            Authorization: `Bearer ${refreshToken}`,
-          },
+        const { access } = (await post('/token/refresh/', null, {
+          useRefreshToken: true,
+        })) as { access: string };
+        setAuthToken(access, refreshToken); // Retry original request with new token
+        const newResponse = await fetch(response.url, {
+          method: requestInfo?.method || 'GET',
+          headers: getHeaders(),
+          body:
+            requestInfo?.method !== 'GET'
+              ? JSON.stringify(requestInfo?.body)
+              : undefined,
         });
-
-        if (refreshResponse.ok) {
-          const { access } = await refreshResponse.json();
-          localStorage.setItem('access_token', access);
-
-          // Retry original request with new token
-          const newResponse = await fetch(response.url, {
-            method: requestInfo?.method || 'GET',
-            headers: getHeaders(),
-            body:
-              requestInfo?.method !== 'GET'
-                ? JSON.stringify(requestInfo?.body)
-                : undefined,
-          });
-
-          return handleResponse(newResponse);
-        }
+        return handleResponse(newResponse);
       } catch (e) {
         console.error('Token refresh failed:', e);
       }
@@ -83,10 +96,23 @@ export const get = async (path: string) => {
   return handleResponse(response, { method: 'GET' });
 };
 
-export const post = async (path: string, body?: any) => {
+export const post = async (
+  path: string,
+  body?: any,
+  options?: { useRefreshToken?: boolean }
+) => {
+  const token = options?.useRefreshToken
+    ? localStorage.getItem('refresh_token')
+    : localStorage.getItem('access_token');
+
+  const headers = {
+    ...defaultHeaders,
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  };
+
   const response = await fetch(API_URL + path, {
     method: 'POST',
-    headers: getHeaders(),
+    headers,
     body: body ? JSON.stringify(body) : undefined,
   });
 

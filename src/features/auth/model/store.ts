@@ -1,7 +1,12 @@
 import { createStore, createEffect, createEvent } from 'effector';
 
 import { getMe } from '../../../entities/user';
-import { post, setAuthToken, removeAuthToken } from '../../../shared/lib';
+import {
+  post,
+  setAuthToken,
+  removeAuthToken,
+  postNoBody,
+} from '../../../shared/lib';
 
 interface AuthState {
   error: boolean;
@@ -44,17 +49,6 @@ export const postCheckAuth = createEffect(
     }
   }
 );
-
-export const verifyToken = createEffect(async () => {
-  try {
-    await post('/token/verify/');
-    return true;
-  } catch (e) {
-    removeAuthToken();
-    setAuthState({ isAuthenticated: false });
-    return false;
-  }
-});
 
 export const logout = createEffect(async () => {
   removeAuthToken();
