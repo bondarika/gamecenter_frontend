@@ -30,16 +30,15 @@ export const postCheckAuth = createEffect(
     setNoError();
 
     try {
-      const { access, refresh } = (await post('/token/', payload)) as {
+      const { access } = (await post('/token/', payload)) as {
         access: string;
-        refresh: string;
       };
 
-      if (!access || !refresh) {
+      if (!access) {
         throw Error('Invalid token response');
       }
 
-      setAuthToken(access, refresh);
+      setAuthToken(access);
       setAuthState({ isAuthenticated: true });
 
       await getMe();

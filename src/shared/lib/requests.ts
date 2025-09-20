@@ -2,20 +2,15 @@ const API_URL =
   (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000/api';
 
 // POST-запрос без body и Content-Type (только Authorization)
-export const postNoBody = async (
-  path: string,
-  options?: { useRefreshToken?: boolean }
-) => {
-  const token = options?.useRefreshToken
-    ? localStorage.getItem('refresh_token')
-    : localStorage.getItem('access_token');
-
+export const postNoBody = async (path: string) => {
+  const token = localStorage.getItem('access_token');
   const headers: Record<string, string> = {};
   if (token) headers['Authorization'] = `Bearer ${token}`;
 
   const response = await fetch(API_URL + path, {
     method: 'POST',
     headers,
+    credentials: 'include', // Needed for sending cookies
   });
 
   return handleResponse(response, { method: 'POST' });
@@ -26,18 +21,14 @@ const defaultHeaders = {
   'Content-Type': 'application/json',
 };
 
-export const setAuthToken = (accessToken: string, refreshToken?: string) => {
-  console.log('[setAuthToken] access:', accessToken, 'refresh:', refreshToken);
+export const setAuthToken = (accessToken: string) => {
+  console.log('[setAuthToken] access:', accessToken);
   localStorage.setItem('access_token', accessToken);
-  if (refreshToken) {
-    localStorage.setItem('refresh_token', refreshToken);
-  }
 };
 
 export const removeAuthToken = () => {
-  console.log('[removeAuthToken] removing tokens');
+  console.log('[removeAuthToken] removing access token');
   localStorage.removeItem('access_token');
-  localStorage.removeItem('refresh_token');
 };
 
 const getHeaders = () => {
@@ -57,31 +48,30 @@ async function handleResponse(
   }
 
   if (response.status === 401) {
-    // Try to refresh token
-    const refreshToken = localStorage.getItem('refresh_token');
-    if (refreshToken) {
-      try {
-        const { access } = (await post('/token/refresh/', null, {
-          useRefreshToken: true,
-        })) as { access: string };
-        setAuthToken(access, refreshToken); // Retry original request with new token
-        const newResponse = await fetch(response.url, {
-          method: requestInfo?.method || 'GET',
-          headers: getHeaders(),
-          body:
-            requestInfo?.method !== 'GET'
-              ? JSON.stringify(requestInfo?.body)
-              : undefined,
-        });
-        return handleResponse(newResponse);
-      } catch (e) {
-        console.error('Token refresh failed:', e);
-      }
-    }
+    try {
+      // Try to refresh token using the HTTP-only cookie
+      const { access } = (await post('/token/refresh/', null)) as {
+        access: string;
+      };
+      setAuthToken(access);
 
-    // If refresh failed or no refresh token, remove tokens and reject
-    removeAuthToken();
-    return Promise.reject(new Error('Unauthorized'));
+      // Retry original request with new token
+      const newResponse = await fetch(response.url, {
+        method: requestInfo?.method || 'GET',
+        headers: getHeaders(),
+        body:
+          requestInfo?.method !== 'GET'
+            ? JSON.stringify(requestInfo?.body)
+            : undefined,
+        credentials: 'include', // Include cookies
+      });
+      return handleResponse(newResponse);
+    } catch (e) {
+      console.error('Token refresh failed:', e);
+      // If refresh failed, remove access token and reject
+      removeAuthToken();
+      return Promise.reject(new Error('Unauthorized'));
+    }
   }
 
   return Promise.reject(response);
@@ -91,20 +81,14 @@ export const get = async (path: string) => {
   const response = await fetch(API_URL + path, {
     method: 'GET',
     headers: getHeaders(),
+    credentials: 'include', // Include cookies
   });
 
   return handleResponse(response, { method: 'GET' });
 };
 
-export const post = async (
-  path: string,
-  body?: any,
-  options?: { useRefreshToken?: boolean }
-) => {
-  const token = options?.useRefreshToken
-    ? localStorage.getItem('refresh_token')
-    : localStorage.getItem('access_token');
-
+export const post = async (path: string, body?: any) => {
+  const token = localStorage.getItem('access_token');
   const headers = {
     ...defaultHeaders,
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
@@ -114,6 +98,7 @@ export const post = async (
     method: 'POST',
     headers,
     body: body ? JSON.stringify(body) : undefined,
+    credentials: 'include'
   });
 
   return handleResponse(response, { method: 'POST', body });
@@ -131,6 +116,7 @@ export const postWithQuery = async (
   const response = await fetch(url.toString(), {
     method: 'POST',
     headers: getHeaders(),
+    credentials: 'include', // Include cookies
   });
 
   return handleResponse(response, { method: 'POST' });

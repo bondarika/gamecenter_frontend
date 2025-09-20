@@ -16,7 +16,10 @@ import './App.css';
 
 function App() {
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter
+      basename="/"
+      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+    >
       <Redirects>
         <Routes>
           <Route path="/" element={<RegistrationPage />} />
@@ -39,9 +42,8 @@ const Redirects = ({ children }: React.PropsWithChildren) => {
 
   React.useEffect(() => {
     const accessToken = localStorage.getItem('access_token');
-    const refreshToken = localStorage.getItem('refresh_token');
 
-    if (!accessToken || !refreshToken) {
+    if (!accessToken) {
       setShouldRender(true);
       redirect('/');
       return;
