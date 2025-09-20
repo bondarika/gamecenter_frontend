@@ -1,5 +1,5 @@
 const API_URL =
-  (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000/api';
+  (import.meta as any).env?.VITE_API_URL || 'http://app:80/api';
 
 // POST-запрос без body и Content-Type (только Authorization)
 export const postNoBody = async (path: string) => {
