@@ -21,12 +21,22 @@ export const BriefArticle = ({ mix, color, title, markdown, image, Footer, Foote
     const text = markdown && markdown2html(markdown);
 
     return (
-        <div className={cx(b(null, { color }), mix)}>
-            <h3 className={b('title')}>{title}</h3>
-            {text && <div className={b('content')} dangerouslySetInnerHTML={{ __html: text }} />}
-            {image && <img className={b('image')} src={image} />}
-            {Footer ? <Footer /> : null}
-            {FooterContent ? FooterContent : null}
-        </div>
+      <div className={cx(b(null, { color }), mix)}>
+        <h3 className={b('title')}>{title}</h3>
+        {text && (
+          <div
+            className={b('content')}
+            dangerouslySetInnerHTML={{ __html: text }}
+          />
+        )}
+        {image && (
+          <img
+            className={b('image')}
+            src={`/${image.replace(/^static\/image\//, '')}`}
+          />
+        )}
+        {Footer ? <Footer /> : null}
+        {FooterContent ? FooterContent : null}
+      </div>
     );
 };
