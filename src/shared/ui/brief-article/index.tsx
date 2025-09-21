@@ -28,12 +28,6 @@ export const BriefArticle = ({
 }: Props) => {
   const text = markdown && markdown2html(markdown);
 
-  // Логирование для отладки изображений
-  if (image) {
-    console.log('BriefArticle image received:', image);
-    console.log('Image type:', typeof image);
-    console.log('Image length:', image.length);
-  }
 
   return (
     <div className={cx(b(null, { color }), mix)}>

@@ -12,6 +12,11 @@ export const useMapTeamIdToStantionsOrder = () => {
   const { allTeams } = useUnit($teamsStore);
   const { stantionsOrder } = useUnit($stantionsStore);
 
+  console.log('useMapTeamIdToStantionsOrder - raw data:', {
+    allTeams: allTeams?.slice(0, 3), // показываем только первые 3 команды
+    stantionsOrder,
+  });
+
   const mapStantionsOrderByTeamId: Record<
     ParticipantTeam['id'],
     StantionsOrder
@@ -19,9 +24,15 @@ export const useMapTeamIdToStantionsOrder = () => {
     const x: Record<ParticipantTeam['id'], StantionsOrder> = {};
 
     allTeams?.forEach(({ id, stations }) => {
-      x[id] = stantionsOrder?.find((order) => order.id === stations)!;
+      const foundOrder = stantionsOrder?.find((order) => order.id === stations);
+      x[id] = foundOrder!;
+      console.log(
+        `Team ${id} stations field: ${stations}, found order:`,
+        foundOrder
+      );
     });
 
+    console.log('Final mapStantionsOrderByTeamId:', x);
     return x;
   }, [allTeams, stantionsOrder]);
 
@@ -40,15 +51,31 @@ export const useMapTeamIdToStatus = (stantionId?: number) => {
   > = {};
 
   if (!allTeams) {
+    console.log('useMapTeamIdToStatus: no allTeams');
     return {};
   }
+
+  console.log('useMapTeamIdToStatus Debug:', {
+    stantionId,
+    allTeamsCount: allTeams.length,
+    mapStantionsOrderByTeamId,
+  });
 
   allTeams.forEach((team) => {
     teamIdToStatus[team.id] = 'on-prev-stantions';
 
+    console.log(`Team ${team.teamname} (ID: ${team.id}):`, {
+      current_station: team.current_station,
+      stationsOrder: mapStantionsOrderByTeamId[team.id]?.order,
+      stantionId,
+    });
+
     for (let i = 1; i < team.current_station; i++) {
       if (mapStantionsOrderByTeamId[team.id].order[i - 1] === stantionId) {
         teamIdToStatus[team.id] = 'accepted';
+        console.log(
+          `  -> Team ${team.teamname} status: accepted (station ${stantionId} at position ${i - 1})`
+        );
         break;
       }
     }
@@ -58,9 +85,17 @@ export const useMapTeamIdToStatus = (stantionId?: number) => {
       stantionId
     ) {
       teamIdToStatus[team.id] = 'not-accepted';
+      console.log(
+        `  -> Team ${team.teamname} status: not-accepted (current station)`
+      );
     }
+
+    console.log(
+      `  -> Final status for ${team.teamname}: ${teamIdToStatus[team.id]}`
+    );
   });
 
+  console.log('Final teamIdToStatus:', teamIdToStatus);
   return teamIdToStatus;
 };
 

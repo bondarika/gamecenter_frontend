@@ -1,5 +1,6 @@
 const API_URL =
   (import.meta as any).env?.VITE_API_URL || 'http://играцентр.рф:8000/api';
+  // (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000/api';
 
 // POST-запрос без body и Content-Type (только Authorization)
 export const postNoBody = async (path: string) => {
