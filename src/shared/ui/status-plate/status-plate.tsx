@@ -13,40 +13,40 @@ import { StatusPlateStantionName } from './__stantion-name';
 import './index.scss';
 
 interface Props {
-    type: 'participant' | 'curator';
+  type: 'participant' | 'curator';
 }
 
 export const b = bem('status-plate');
 
 export const StatusPlate = ({ type }: Props) => {
-    const isSmallMobile = useMedia('(max-width: 420px)');
+  const isSmallMobile = useMedia('(max-width: 420px)');
 
-    return (
-        <>
-            <div className={b()}>
-                {isSmallMobile ? (
-                    <div className={b('flex-center')}>
-                        <Logo mix={b('logo')} />
-                        {type === 'participant' && <StatusPlateTime />}
-                    </div>
-                ) : (
-                    <Logo mix={b('logo')} />
-                )}
+  return (
+    <>
+      <div className={b()}>
+        {isSmallMobile ? (
+          <div className={b('flex-center')}>
+            <Logo mix={b('logo')} />
+            {type === 'participant' && <StatusPlateTime />}
+          </div>
+        ) : (
+          <Logo mix={b('logo')} />
+        )}
 
-                <div className={b('flex-center')}>
-                    {type === 'participant' ? (
-                        <>
-                            {!isSmallMobile && <StatusPlateTime />}
-                            <StatusPlateLocations />
-                            <StatusPlatePoints />
-                        </>
-                    ) : (
-                        <StatusPlateTeams />
-                    )}
-                </div>
-            </div>
+        <div className={b('flex-center')}>
+          {type === 'participant' ? (
+            <>
+              {!isSmallMobile && <StatusPlateTime />}
+              <StatusPlateLocations />
+              <StatusPlatePoints />
+            </>
+          ) : (
+            <StatusPlateTeams />
+          )}
+        </div>
+      </div>
 
-            {type === 'curator' && <StatusPlateStantionName />}
-        </>
-    );
+      {type === 'curator' && <StatusPlateStantionName />}
+    </>
+  );
 };

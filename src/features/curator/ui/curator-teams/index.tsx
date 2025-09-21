@@ -53,14 +53,14 @@ export const CuratorTeams = ({ mix }: Props) => {
       {allTeams?.map((team, index) => {
         index += 1;
 
-        const { teamname, id } = team;
+        const { team_name: teamname, id } = team;
 
         if (teamIdToStatus[team.id] === 'accepted') {
           return (
             <PopupPlate
               mix={b('content-wrapper')}
-              title={stantion?.name || 'Станция'}
-              teamName={teamname}
+              title={teamname}
+              teamName={stantion?.name || 'Станция'}
               status="finished"
               key={id}
               color="gray"
@@ -70,8 +70,8 @@ export const CuratorTeams = ({ mix }: Props) => {
           return (
             <PopupPlate
               mix={b('content-wrapper')}
-              title={stantion?.name || 'Станция'}
-              teamName={teamname}
+              title={teamname}
+              teamName={stantion?.name || 'Станция'}
               status="locked"
               key={id}
               color="gray"
@@ -82,8 +82,8 @@ export const CuratorTeams = ({ mix }: Props) => {
         return (
           <PopupPlate
             mix={b('content-wrapper')}
-            title={stantion?.name || 'Станция'}
-            teamName={teamname}
+            title={teamname}
+            teamName={stantion?.name || 'Станция'}
             status="active"
             numberic={index}
             key={id}
