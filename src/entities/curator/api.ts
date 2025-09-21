@@ -5,7 +5,6 @@ import { get } from '../../shared/lib';
 import type { Curator } from './typings';
 
 export const getCurator = createEffect(async (userId: number) => {
-
   try {
     const curators = (await get(`/curator`)) as Curator[];
 

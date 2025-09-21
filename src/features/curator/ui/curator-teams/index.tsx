@@ -48,7 +48,6 @@ export const CuratorTeams = ({ mix }: Props) => {
 
   const teamIdToStatus = useMapTeamIdToStatus(curatorStationId);
 
-
   return (
     <div className={cx(b(), mix)}>
       {allTeams?.map((team, index) => {

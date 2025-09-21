@@ -13,7 +13,6 @@ export const StatusPlateTeams = () => {
   const curatorStationId = curator?.station || curator?.station_id;
   const { count, teamsCount } = useAcceptedTeamsCount(curatorStationId);
 
-
   return (
     <div className={cx(b('block'), b('wrapped-block'))}>
       <svg
