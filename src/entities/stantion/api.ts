@@ -10,9 +10,6 @@ export const getStantions = createEffect(async () => {
     get('/stationorder/'),
   ]);
 
-  console.log('Raw stations:', rawStantions);
-  console.log('Raw stations order:', rawStantionsOrder);
-
   const stantions: Record<Stantion['id'], Stantion> = {};
   rawStantions.forEach((stantion: Stantion) => {
     stantions[stantion.id] = stantion;
@@ -20,8 +17,6 @@ export const getStantions = createEffect(async () => {
 
   const stantionsOrder: StantionsOrder[] = rawStantionsOrder.map(
     (rawOrder: any) => {
-      console.log(`Processing station order ${rawOrder.id}:`, rawOrder);
-
       return {
         id: rawOrder.id,
         order: [
@@ -39,8 +34,6 @@ export const getStantions = createEffect(async () => {
       };
     }
   );
-
-  console.log('Processed stantions order:', stantionsOrder);
 
   return { stantions, stantionsOrder };
 });

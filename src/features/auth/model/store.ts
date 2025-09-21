@@ -30,19 +30,31 @@ export const postCheckAuth = createEffect(
     setNoError();
 
     try {
-      const { access } = (await post('/token/', payload)) as {
+      const { access } = (await post('/token', payload)) as {
         access: string;
       };
 
       if (!access) {
+        console.error('[postCheckAuth] Invalid token response');
         throw Error('Invalid token response');
       }
 
       setAuthToken(access);
       setAuthState({ isAuthenticated: true });
 
-      await getMe();
+      try {
+        await getMe();
+      } catch (getMeError) {
+        console.error(
+          '[postCheckAuth] getMe failed, but token is valid:',
+          getMeError
+        );
+        // Не выбрасываем ошибку, если токен получен успешно
+        // getMe может упасть из-за проблем с загрузкой дополнительных данных
+        // но это не должно блокировать логин
+      }
     } catch (e) {
+      console.error('[postCheckAuth] Login failed:', e);
       setError();
       throw e;
     }

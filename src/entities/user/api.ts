@@ -19,7 +19,7 @@ export const getMe = createEffect(async () => {
 
     return me;
   } catch (e) {
-    console.error(e);
+    console.error('[getMe] Error:', e);
     throw new Error('Ошибка получения me');
   }
 });

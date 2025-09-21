@@ -14,12 +14,6 @@ export const useOrderedStantionsById = (
   );
 
   const orderedStantions = useMemo(() => {
-    console.log('Debug useOrderedStantionsById:');
-    console.log('stantionOrderId:', stantionOrderId);
-    console.log('stantionsOrder:', stantionsOrder);
-    console.log('teamStantionsOrder:', teamStantionsOrder);
-    console.log('stantions:', stantions);
-
     if (!teamStantionsOrder?.order || !stantions) {
       return undefined;
     }

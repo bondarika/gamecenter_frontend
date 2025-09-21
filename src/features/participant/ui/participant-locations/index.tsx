@@ -33,11 +33,6 @@ export const ParticipantLocations = ({ mix }: Props) => {
   const orderedStantions = useOrderedStantionsById(team?.stations);
 
   useEffect(() => {
-    console.log('Team data:', team);
-    console.log('Ordered stations:', orderedStantions);
-    console.log('Current station:', team?.current_station);
-    console.log('Stations length:', orderedStantions?.length);
-
     if (
       team?.current_station &&
       orderedStantions?.length &&
@@ -81,12 +76,18 @@ export const ParticipantLocations = ({ mix }: Props) => {
 
         let imgSrc = '';
         if (image && image !== 'null') {
+          console.log('Original image from station:', image);
           let parsed = '';
           const img = image.split('/');
-          for (let i = 3; i < img.length; i++) {
+          console.log('Split image parts:', img);
+          // Исправляем логику: начинаем с индекса 0, а не 3
+          for (let i = 0; i < img.length; i++) {
             parsed += '/' + img[i];
           }
-          imgSrc = `http://играцентр.рф${parsed}`;
+          imgSrc = `http://играцентр.рф:8000${parsed}`;
+          console.log('Final imgSrc:', imgSrc);
+        } else {
+          console.log('No image or image is null:', image);
         }
 
         return (
@@ -113,9 +114,9 @@ export const ParticipantLocations = ({ mix }: Props) => {
               Footer={() => (
                 <div style={{ display: 'flex', marginTop: 12 }}>
                   <StatusPlateTimeRaw
-                    time={`${(stantion.time)} ${plural(
+                    time={`${stantion.time} ${plural(
                       ['минута', 'минуты', 'минут'],
-                      (stantion.time)
+                      stantion.time
                     )}`}
                     mix={b('time-plate')}
                   />

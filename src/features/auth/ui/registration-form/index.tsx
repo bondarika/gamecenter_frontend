@@ -11,63 +11,77 @@ import './index.scss';
 
 /** Форма регистрации при входе на платформу */
 export const RegistrationForm = () => {
-    const [username, setUsername] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [wasEdited, setWasEdited] = React.useState(false);
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [wasEdited, setWasEdited] = React.useState(false);
 
-    const postCheckAuthPending = useUnit(postCheckAuth.pending);
-    const getMePending = useUnit(getMe.pending);
-    const pending = postCheckAuthPending || getMePending;
+  const postCheckAuthPending = useUnit(postCheckAuth.pending);
+  const getMePending = useUnit(getMe.pending);
+  const pending = postCheckAuthPending || getMePending;
 
-    const { error } = useUnit($authStore);
+  const { error } = useUnit($authStore);
 
-    useEffect(() => {
-        setWasEdited(true);
-    }, [username, password]);
+  // Обработка успешного логина
+  useEffect(() => {
+    const unsubscribe = postCheckAuth.done.watch(() => {
+      // Редирект произойдет автоматически через App.tsx
+    });
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+    return unsubscribe;
+  }, []);
 
-        setWasEdited(false);
-        postCheckAuth({ username, password });
-    };
+  useEffect(() => {
+    setWasEdited(true);
+  }, [username, password]);
 
-    const shouldDisableSubmit = pending || !username || !password || (error && !wasEdited);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-    // Есть прикол, что автозаполненные браузером поля не триггерят onChange
-    // и кнопка submit остается disabled, пока пользователь не кликнет по полю
-    return (
-        <form className={'registration-form'} onSubmit={handleSubmit}>
-            <Logo mix="registration-form__logo" />
-            <span className="registration-form__subtitle">играцентр — 2025</span>
-            <span className="registration-form__title">авторизация</span>
+    setWasEdited(false);
+    postCheckAuth({ username, password });
+  };
 
-            <div className="registration-form__controls">
-                {/* чтобы браузер сохранил логин оказывается нужно положить name="login" */}
-                {/* иначе сохраняется только поле с паролем */}
-                <input
-                    className="registration-form__input"
-                    placeholder="логин"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    type="text"
-                    name="login"
-                />
-                <input
-                    className="registration-form__input"
-                    placeholder="пароль"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    type="password"
-                />
+  const shouldDisableSubmit =
+    pending || !username || !password || (error && !wasEdited);
 
-                <Button type="submit" disabled={shouldDisableSubmit}>
-                    готово
-                </Button>
-            </div>
+  // Есть прикол, что автозаполненные браузером поля не триггерят onChange
+  // и кнопка submit остается disabled, пока пользователь не кликнет по полю
+  return (
+    <form className={'registration-form'} onSubmit={handleSubmit}>
+      <Logo mix="registration-form__logo" />
+      <span className="registration-form__subtitle">играцентр — 2025</span>
+      <span className="registration-form__title">авторизация</span>
 
-            {/* сократил текст из макета, иначе получается очень мелко */}
-            {error && !wasEdited && <div className="registration-form__error">неверный логин или пароль</div>}
-        </form>
-    );
+      <div className="registration-form__controls">
+        {/* чтобы браузер сохранил логин оказывается нужно положить name="login" */}
+        {/* иначе сохраняется только поле с паролем */}
+        <input
+          className="registration-form__input"
+          placeholder="логин"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          type="text"
+          name="login"
+        />
+        <input
+          className="registration-form__input"
+          placeholder="пароль"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+        />
+
+        <Button type="submit" disabled={shouldDisableSubmit}>
+          готово
+        </Button>
+      </div>
+
+      {/* сократил текст из макета, иначе получается очень мелко */}
+      {error && !wasEdited && (
+        <div className="registration-form__error">
+          неверный логин или пароль
+        </div>
+      )}
+    </form>
+  );
 };

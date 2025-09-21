@@ -35,37 +35,46 @@ function App() {
 
 const Redirects = ({ children }: React.PropsWithChildren) => {
   const [shouldRender, setShouldRender] = React.useState(false);
+  const [isInitialized, setIsInitialized] = React.useState(false);
 
   const { me, loading } = useUnit($userStore);
 
   const redirect = useNavigate();
 
+  // Инициализация - вызывается только один раз
   React.useEffect(() => {
+    if (isInitialized) return;
+
     const accessToken = localStorage.getItem('access_token');
 
     if (!accessToken) {
       setShouldRender(true);
+      setIsInitialized(true);
       redirect('/');
       return;
     }
 
     getMe()
-      .then(() => {
-        setShouldRender(true);
+      .then((me) => {
+        setIsInitialized(true);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error('[App] getMe error:', error);
         removeAuthToken();
+        setIsInitialized(true);
         setShouldRender(true);
         redirect('/');
       });
-  }, []);
+  }, [isInitialized]);
 
+  // Обработка редиректов после получения данных пользователя
   React.useEffect(() => {
-    if (loading) {
+    if (!isInitialized) {
       return;
     }
 
     setShouldRender(true);
+
     if (!me) {
       redirect('/');
     } else if (!localStorage.getItem('agreed')) {
@@ -75,7 +84,7 @@ const Redirects = ({ children }: React.PropsWithChildren) => {
     } else {
       redirect('/participant');
     }
-  }, [loading, me]);
+  }, [isInitialized, me]);
 
   if (!shouldRender) {
     return <Page>Авторизация...</Page>;
