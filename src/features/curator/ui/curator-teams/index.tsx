@@ -48,20 +48,6 @@ export const CuratorTeams = ({ mix }: Props) => {
 
   const teamIdToStatus = useMapTeamIdToStatus(curatorStationId);
 
-  // Дебаг информация
-  console.log('CuratorTeams Debug:', {
-    curator: curator,
-    curatorStation: curator?.station,
-    curatorStationId: curator?.station_id,
-    finalStationId: curatorStationId,
-    allTeamsCount: allTeams?.length,
-    teamIdToStatus,
-    allTeams: allTeams?.map((team) => ({
-      id: team.id,
-      name: team.teamname,
-      current_station: team.current_station,
-    })),
-  });
 
   return (
     <div className={cx(b(), mix)}>
@@ -74,7 +60,8 @@ export const CuratorTeams = ({ mix }: Props) => {
           return (
             <PopupPlate
               mix={b('content-wrapper')}
-              title={teamname}
+              title={stantion?.name || 'Станция'}
+              teamName={teamname}
               status="finished"
               key={id}
               color="gray"
@@ -84,7 +71,8 @@ export const CuratorTeams = ({ mix }: Props) => {
           return (
             <PopupPlate
               mix={b('content-wrapper')}
-              title={teamname}
+              title={stantion?.name || 'Станция'}
+              teamName={teamname}
               status="locked"
               key={id}
               color="gray"
@@ -95,7 +83,8 @@ export const CuratorTeams = ({ mix }: Props) => {
         return (
           <PopupPlate
             mix={b('content-wrapper')}
-            title={teamname}
+            title={stantion?.name || 'Станция'}
+            teamName={teamname}
             status="active"
             numberic={index}
             key={id}

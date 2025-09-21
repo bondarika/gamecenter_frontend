@@ -59,7 +59,6 @@ const Redirects = ({ children }: React.PropsWithChildren) => {
         setIsInitialized(true);
       })
       .catch((error) => {
-        console.error('[App] getMe error:', error);
         removeAuthToken();
         setIsInitialized(true);
         setShouldRender(true);

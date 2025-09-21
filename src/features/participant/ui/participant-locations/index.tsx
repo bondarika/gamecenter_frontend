@@ -76,18 +76,14 @@ export const ParticipantLocations = ({ mix }: Props) => {
 
         let imgSrc = '';
         if (image && image !== 'null') {
-          console.log('Original image from station:', image);
           let parsed = '';
           const img = image.split('/');
-          console.log('Split image parts:', img);
           // Исправляем логику: начинаем с индекса 0, а не 3
           for (let i = 0; i < img.length; i++) {
             parsed += '/' + img[i];
           }
           imgSrc = `http://играцентр.рф:8000${parsed}`;
-          console.log('Final imgSrc:', imgSrc);
         } else {
-          console.log('No image or image is null:', image);
         }
 
         return (
